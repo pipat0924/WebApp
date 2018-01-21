@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="InvReceiveStockByStock_Landscape" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="b8b851f0-b7be-4587-93aa-a6e647ce813c">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="340"/>
+	<style name="Cat_Bg_Title" isDefault="true" mode="Opaque" backcolor="#808080" fill="Solid" vAlign="Middle" fontName="FreesiaUPC" fontSize="16" isBold="true"/>
+	<style name="Cat_Bt_Title" isDefault="true" mode="Opaque" forecolor="#000000" fill="Solid" vAlign="Middle" fontName="FreesiaUPC" fontSize="16" isBold="true"/>
+	<style name="Cat_Wt_Title" isDefault="true" mode="Opaque" forecolor="#000000" backcolor="#FFFFFF" fill="Solid" vAlign="Middle" fontName="FreesiaUPC" fontSize="16" isBold="true"/>
+	<style name="Cat_Hl_Common" isDefault="true" forecolor="#000000" fill="Solid" vAlign="Middle" fontName="FreesiaUPC" fontSize="14" isBold="true"/>
+	<style name="Cat_Ct_Common" isDefault="true" forecolor="#000000" fill="Solid" vAlign="Middle" fontName="FreesiaUPC" fontSize="12"/>
+	<parameter name="ReportSource" class="th.net.cat.epis.to.report.DailyPaymentTO"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="rowNo" class="java.lang.String">
+		<fieldDescription><![CDATA[rowNo]]></fieldDescription>
+	</field>
+	<field name="sumCancelReceipt" class="java.lang.String">
+		<fieldDescription><![CDATA[sumCancelReceipt]]></fieldDescription>
+	</field>
+	<field name="sumCancelAmount" class="java.lang.String">
+		<fieldDescription><![CDATA[sumCancelAmount]]></fieldDescription>
+	</field>
+	<field name="sumReceipt" class="java.lang.String">
+		<fieldDescription><![CDATA[sumReceipt]]></fieldDescription>
+	</field>
+	<field name="sumAmount" class="java.lang.String">
+		<fieldDescription><![CDATA[sumAmount]]></fieldDescription>
+	</field>
+	<field name="sumTotalReceipt" class="java.lang.String">
+		<fieldDescription><![CDATA[sumTotalReceipt]]></fieldDescription>
+	</field>
+	<field name="sumTotalAmount" class="java.lang.String">
+		<fieldDescription><![CDATA[sumTotalAmount]]></fieldDescription>
+	</field>
+	<field name="rowSummary" class="java.lang.String">
+		<fieldDescription><![CDATA[rowSummary]]></fieldDescription>
+	</field>
+	<field name="paymentMessage" class="java.lang.String">
+		<fieldDescription><![CDATA[paymentMessage]]></fieldDescription>
+	</field>
+	<field name="paymentUser" class="java.lang.String">
+		<fieldDescription><![CDATA[paymentUser]]></fieldDescription>
+	</field>
+	<field name="paymentType" class="java.lang.String">
+		<fieldDescription><![CDATA[paymentType]]></fieldDescription>
+	</field>
+	<field name="sumRowPayFull" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[sumRowPayFull]]></fieldDescription>
+	</field>
+	<field name="sumAmountPayFull" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[sumAmountPayFull]]></fieldDescription>
+	</field>
+	<field name="sumRowPayAdvance" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[sumRowPayAdvance]]></fieldDescription>
+	</field>
+	<field name="sumAmountPayAdvance" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[sumAmountPayAdvance]]></fieldDescription>
+	</field>
+	<field name="sumRowPayPartial" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[sumRowPayPartial]]></fieldDescription>
+	</field>
+	<field name="sumAmountPayPartial" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[sumAmountPayPartial]]></fieldDescription>
+	</field>
+	<field name="sumRowPayPenalty" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[sumRowPayPenalty]]></fieldDescription>
+	</field>
+	<field name="sumAmountPayPenalty" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[sumAmountPayPenalty]]></fieldDescription>
+	</field>
+	<field name="sumRowExtend" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[sumRowExtend]]></fieldDescription>
+	</field>
+	<field name="sumAmountExtend" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[sumAmountExtend]]></fieldDescription>
+	</field>
+	<variable name="sumRowPayFull_1" class="java.math.BigDecimal" resetType="Group" resetGroup="userGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{sumRowPayFull}]]></variableExpression>
+	</variable>
+	<variable name="sumAmountPayFull_1" class="java.math.BigDecimal" resetType="Group" resetGroup="userGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{sumAmountPayFull}]]></variableExpression>
+	</variable>
+	<variable name="sumRowPayAdvance_1" class="java.math.BigDecimal" resetType="Group" resetGroup="userGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{sumRowPayAdvance}]]></variableExpression>
+	</variable>
+	<variable name="sumAmountPayAdvance_1" class="java.math.BigDecimal" resetType="Group" resetGroup="userGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{sumAmountPayAdvance}]]></variableExpression>
+	</variable>
+	<variable name="sumRowPayPartial_1" class="java.math.BigDecimal" resetType="Group" resetGroup="userGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{sumRowPayPartial}]]></variableExpression>
+	</variable>
+	<variable name="sumAmountPayPartial_1" class="java.math.BigDecimal" resetType="Group" resetGroup="userGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{sumAmountPayPartial}]]></variableExpression>
+	</variable>
+	<variable name="sumRowPayPenalty_1" class="java.math.BigDecimal" resetType="Group" resetGroup="userGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{sumRowPayPenalty}]]></variableExpression>
+	</variable>
+	<variable name="sumAmountPayPenalty_1" class="java.math.BigDecimal" resetType="Group" resetGroup="userGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{sumAmountPayPenalty}]]></variableExpression>
+	</variable>
+	<variable name="sumRowExtend_1" class="java.math.BigDecimal" resetType="Group" resetGroup="userGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{sumRowExtend}]]></variableExpression>
+	</variable>
+	<variable name="sumAmountExtend_1" class="java.math.BigDecimal" resetType="Group" resetGroup="userGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{sumAmountExtend}]]></variableExpression>
+	</variable>
+	<group name="userGroup" keepTogether="true">
+		<groupExpression><![CDATA[$F{paymentUser}]]></groupExpression>
+		<groupFooter>
+			<band height="215" splitType="Prevent">
+				<printWhenExpression><![CDATA[$F{paymentUser}!=null]]></printWhenExpression>
+				<frame>
+					<reportElement x="0" y="0" width="752" height="215" isRemoveLineWhenBlank="true" uuid="01d5f0f8-0f4d-4bf7-ab2c-6b288bb267fa"/>
+					<frame>
+						<reportElement x="0" y="0" width="752" height="26" uuid="c5109512-5473-4ef4-8c89-d8935c69eb74"/>
+						<box>
+							<topPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+						</box>
+						<staticText>
+							<reportElement x="0" y="0" width="160" height="26" uuid="7353ea39-8d44-45ea-bae3-d112fdb58e1d"/>
+							<textElement textAlignment="Left"/>
+							<text><![CDATA[รับชำระแบบเต็มจำนวน]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="569" y="0" width="91" height="26" uuid="17dbf010-d92f-4474-baf5-846b6ef4915c"/>
+							<textElement textAlignment="Left"/>
+							<text><![CDATA[ รายการ]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="469" y="0" width="99" height="26" uuid="95e778cd-7904-435c-9992-f78c7ce1f9c6"/>
+							<textElement textAlignment="Right"/>
+							<textFieldExpression><![CDATA[( $V{sumRowPayFull_1}==null ? "0" : $V{sumRowPayFull_1} )]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00">
+							<reportElement x="659" y="0" width="93" height="26" uuid="7208c001-ed23-41b8-b9b6-9e5fc1bd69b0"/>
+							<textElement textAlignment="Right"/>
+							<textFieldExpression><![CDATA[( $V{sumAmountPayFull_1}==null ? "0.0" : $V{sumAmountPayFull_1} )]]></textFieldExpression>
+						</textField>
+					</frame>
+					<frame>
+						<reportElement x="0" y="26" width="752" height="26" uuid="6d1cd082-9e56-4998-abc5-6fd30108484e"/>
+						<box>
+							<bottomPen lineWidth="0.75"/>
+						</box>
+						<staticText>
+							<reportElement x="0" y="0" width="160" height="26" uuid="44cbd208-eda7-45d4-b40e-180f974622a3"/>
+							<textElement textAlignment="Left"/>
+							<text><![CDATA[รับชำระแบบไม่เต็มจำนวน]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="569" y="0" width="91" height="26" uuid="c5ba912c-99ad-4c2c-927c-183df8779d5b"/>
+							<textElement textAlignment="Left"/>
+							<text><![CDATA[ รายการ]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="469" y="0" width="100" height="26" uuid="e41c595e-3b70-4e8d-9db8-da370d16538d"/>
+							<textElement textAlignment="Right"/>
+							<textFieldExpression><![CDATA[( $V{sumRowPayAdvance_1}==null ? "0" : $V{sumRowPayAdvance_1} )]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00">
+							<reportElement x="659" y="0" width="93" height="26" uuid="5a46fe98-bd57-4a53-9f54-9195055f3ec0"/>
+							<textElement textAlignment="Right"/>
+							<textFieldExpression><![CDATA[( $V{sumAmountPayAdvance_1}==null ? "0.0" : $V{sumAmountPayAdvance_1} )]]></textFieldExpression>
+						</textField>
+					</frame>
+					<frame>
+						<reportElement x="0" y="52" width="752" height="26" uuid="1ae5fdb1-c962-42fa-81e2-679e067f8702"/>
+						<box>
+							<bottomPen lineWidth="0.75"/>
+						</box>
+						<staticText>
+							<reportElement x="569" y="0" width="91" height="26" uuid="c8c6a29d-85ac-4068-a7ab-7e9d60493c5d"/>
+							<textElement textAlignment="Left"/>
+							<text><![CDATA[ รายการ]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="0" width="160" height="26" uuid="92f91478-2158-4e36-932e-80b7ddaec03b"/>
+							<textElement textAlignment="Left"/>
+							<text><![CDATA[รับชำระล่วงหน้า]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="469" y="0" width="99" height="26" uuid="3585bc45-d396-4cd0-a306-26008735c068"/>
+							<textElement textAlignment="Right"/>
+							<textFieldExpression><![CDATA[( $V{sumRowPayPartial_1}==null ? "0": $V{sumRowPayPartial_1} )]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00">
+							<reportElement x="659" y="0" width="93" height="26" uuid="c62c4e25-3402-4531-ac50-09c04ab4b9e0"/>
+							<textElement textAlignment="Right"/>
+							<textFieldExpression><![CDATA[( $V{sumAmountPayPartial_1}==null ? "0.0": $V{sumAmountPayPartial_1} )]]></textFieldExpression>
+						</textField>
+					</frame>
+					<frame>
+						<reportElement x="0" y="78" width="752" height="26" uuid="c658d64b-28fa-4909-8285-3795849e9704"/>
+						<box>
+							<bottomPen lineWidth="0.75"/>
+						</box>
+						<staticText>
+							<reportElement x="569" y="0" width="91" height="26" uuid="dce311f6-60a1-460a-b38b-5deb8b9023fe"/>
+							<textElement textAlignment="Left"/>
+							<text><![CDATA[ รายการ]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="0" width="160" height="26" uuid="eaea9e55-5e15-4995-a269-339b223fd955"/>
+							<textElement textAlignment="Left"/>
+							<text><![CDATA[รับชำระค่าปรับบริการ]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="469" y="0" width="100" height="26" uuid="943c8550-a59f-4c2e-9295-9de141a2f0c1"/>
+							<textElement textAlignment="Right"/>
+							<textFieldExpression><![CDATA[( $V{sumRowPayPenalty_1}==null? "0" : $V{sumRowPayPenalty_1} )]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00">
+							<reportElement x="659" y="0" width="93" height="26" uuid="f92afca8-4604-4e86-8c0f-36f552602a98"/>
+							<textElement textAlignment="Right"/>
+							<textFieldExpression><![CDATA[( $V{sumAmountPayPenalty_1}==null ? "0.0" : $V{sumAmountPayPenalty_1} )]]></textFieldExpression>
+						</textField>
+					</frame>
+					<frame>
+						<reportElement x="0" y="104" width="752" height="26" uuid="aadb2cac-d3d7-4efa-9ac4-a952f943942e"/>
+						<box>
+							<bottomPen lineWidth="0.75"/>
+						</box>
+						<staticText>
+							<reportElement x="569" y="0" width="91" height="26" uuid="ffd5a76e-25f8-4393-9675-894efb169cb4"/>
+							<textElement textAlignment="Left"/>
+							<text><![CDATA[ รายการ]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="0" width="160" height="26" uuid="3a93eeb1-6cbf-47b8-95a4-cb3f22e6da35"/>
+							<textElement textAlignment="Left"/>
+							<text><![CDATA[รับชำระค่าต่อบริการ]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="470" y="0" width="98" height="26" uuid="ecca014d-cf97-49ec-8aee-5805e516f561"/>
+							<textElement textAlignment="Right"/>
+							<textFieldExpression><![CDATA[($V{sumRowExtend_1}==null ? "0" : $V{sumRowExtend_1} )]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00">
+							<reportElement x="659" y="0" width="93" height="26" uuid="0f22706f-7809-41c7-af20-8374a7795dc7"/>
+							<textElement textAlignment="Right"/>
+							<textFieldExpression><![CDATA[($V{sumAmountExtend_1}==null ? "0.0" : $V{sumAmountExtend_1} )]]></textFieldExpression>
+						</textField>
+					</frame>
+				</frame>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Prevent">
+			<printWhenExpression><![CDATA[$F{paymentUser}!=null]]></printWhenExpression>
+		</band>
+	</background>
+	<pageHeader>
+		<band height="106" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="10" width="752" height="24" uuid="8131e5f3-b6d1-4b75-9e85-a607021d6c11"/>
+				<staticText>
+					<reportElement x="260" y="0" width="240" height="24" uuid="b89bc298-ac50-4026-af6a-65572a020a17">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box topPadding="2" bottomPadding="0"/>
+					<textElement textAlignment="Center">
+						<font fontName="FreesiaUPC"/>
+						<paragraph leftIndent="1"/>
+					</textElement>
+					<text><![CDATA[รายงานการปิดบัญชีประจำวัน]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="580" y="0" width="60" height="24" uuid="f6c8f665-efac-447b-b94c-50c4bd62a8f1">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box topPadding="2" bottomPadding="0"/>
+					<textElement textAlignment="Right">
+						<font fontName="FreesiaUPC"/>
+						<paragraph leftIndent="1"/>
+					</textElement>
+					<text><![CDATA[หน้าที่]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="650" y="0" width="20" height="24" uuid="e064aea7-2b7d-4ba0-98b5-0adf20008fc4"/>
+					<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Report">
+					<reportElement x="670" y="0" width="80" height="24" uuid="e235087b-c87c-4b42-813f-b8db4bb97621"/>
+					<textFieldExpression><![CDATA["/ "+ $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="0" y="34" width="752" height="24" uuid="55611229-deeb-4579-ac81-b775a222f679"/>
+				<staticText>
+					<reportElement x="0" y="0" width="280" height="24" uuid="38aaca1b-7b1c-47cd-8478-b21e0c7c6137">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box topPadding="2" bottomPadding="0"/>
+					<textElement textAlignment="Left">
+						<font fontName="FreesiaUPC"/>
+						<paragraph leftIndent="1"/>
+					</textElement>
+					<text><![CDATA[บริษัท กสท โทรคมนาคม จำกัด (มหาชน)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="280" y="0" width="90" height="24" uuid="f1f70505-4fa1-42ca-be97-1f2ea8f95d14">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box topPadding="2" bottomPadding="0"/>
+					<textElement textAlignment="Right">
+						<font fontName="FreesiaUPC"/>
+						<paragraph leftIndent="1"/>
+					</textElement>
+					<text><![CDATA[ประจำวันที่]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="580" y="0" width="60" height="24" uuid="b556c307-d209-4bc2-9d2c-1bce0d4f04f1">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box topPadding="2" bottomPadding="0"/>
+					<textElement textAlignment="Right">
+						<font fontName="FreesiaUPC"/>
+						<paragraph leftIndent="1"/>
+					</textElement>
+					<text><![CDATA[วันเวลาพิมพ์]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="650" y="0" width="101" height="24" uuid="daa6a9da-6576-46c0-8a7a-ed1b98bcef14"/>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA[$P{ReportSource}.getDocumentDate()]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="380" y="0" width="100" height="24" uuid="1ff7c6f9-1c9a-4262-bfd1-d5a17a07a288"/>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA[$P{ReportSource}.getPaymentDate()]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="0" y="58" width="752" height="24" uuid="3b772bb1-708a-49d8-9641-af9ee28df706"/>
+				<staticText>
+					<reportElement x="0" y="0" width="80" height="24" uuid="4f2e2fc2-1ca9-4b1f-be9f-0a92f2b81c65">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box topPadding="2" bottomPadding="0"/>
+					<textElement textAlignment="Left">
+						<font fontName="FreesiaUPC"/>
+						<paragraph leftIndent="1"/>
+					</textElement>
+					<text><![CDATA[ชื่อสถานประกอบการ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="90" y="0" width="190" height="24" uuid="bb8b4237-a3a0-4da8-b25c-c88cde5addaa"/>
+					<textFieldExpression><![CDATA[$P{ReportSource}.getBranchName()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="280" y="0" width="200" height="24" uuid="e4a1cf81-55ab-4e3b-9467-86be341bcdbf">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box topPadding="2" bottomPadding="0"/>
+					<textElement textAlignment="Center">
+						<font fontName="FreesiaUPC"/>
+						<paragraph leftIndent="1"/>
+					</textElement>
+					<text><![CDATA[เลขประจำตัวผู้เสียภาษีอากร 0107546000229]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement x="0" y="82" width="752" height="24" uuid="c4cd766e-6830-4e37-8167-c65649b37345"/>
+			</frame>
+			<frame>
+				<reportElement x="0" y="82" width="752" height="24" uuid="49ef5d16-c402-495e-989e-0dcd45d21ec3"/>
+				<staticText>
+					<reportElement x="0" y="0" width="63" height="24" uuid="3f3d7935-521a-44f3-b608-6f74b55af75c">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box topPadding="2" bottomPadding="0"/>
+					<textElement textAlignment="Left">
+						<font fontName="FreesiaUPC"/>
+						<paragraph leftIndent="1"/>
+					</textElement>
+					<text><![CDATA[สถานที่รับชำระ : ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="509" y="0" width="60" height="24" uuid="35e71480-d8cf-4e9b-884d-15ada8cccf71">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box topPadding="2" bottomPadding="0"/>
+					<textElement textAlignment="Right">
+						<font fontName="FreesiaUPC"/>
+						<paragraph leftIndent="1"/>
+					</textElement>
+					<text><![CDATA[เจ้าหน้าที่]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="63" y="0" width="240" height="24" uuid="a4b02e6b-341f-4207-9d05-15f9027cbf26"/>
+					<textFieldExpression><![CDATA[$P{ReportSource}.getPosName()]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="580" y="0" width="170" height="24" uuid="df04efe4-92e4-4f4d-937d-d059431bbcd7"/>
+					<textFieldExpression><![CDATA[$F{paymentUser}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="29" splitType="Prevent">
+			<printWhenExpression><![CDATA[$F{paymentUser}!=null]]></printWhenExpression>
+			<frame>
+				<reportElement x="0" y="0" width="752" height="28" uuid="84013787-b871-40e5-8fc6-59569c397509"/>
+				<box>
+					<topPen lineWidth="1.2" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.2" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<staticText>
+					<reportElement x="0" y="0" width="30" height="28" uuid="47de2311-1445-438f-beaf-bf9d274c7c32"/>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[ลำดับที่]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="160" y="0" width="100" height="28" uuid="28a645e2-6abc-4642-9926-ca5d1589564f"/>
+					<textElement textAlignment="Right"/>
+					<text><![CDATA[รวมใบเสร็จที่ยกเลิก]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="260" y="0" width="110" height="28" uuid="7af33099-c7bf-40c0-8bd1-44e1f484572c"/>
+					<textElement textAlignment="Right"/>
+					<text><![CDATA[รวมเงินที่ยกเลิก]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="370" y="0" width="100" height="28" uuid="d2b338e3-d251-4d6b-aa14-90e1c8bdd72d"/>
+					<textElement textAlignment="Right"/>
+					<text><![CDATA[รวมใบเสร็จ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="470" y="0" width="99" height="28" uuid="3247b39c-3bc5-40dc-b7a0-e70c9e3015ef"/>
+					<textElement textAlignment="Right"/>
+					<text><![CDATA[รวมเงิน]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="569" y="0" width="91" height="28" uuid="3adcc5a8-43be-4e99-b937-afb13e27eec8"/>
+					<textElement textAlignment="Right"/>
+					<text><![CDATA[รวมใบเสร็จทั้งสิ้น]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="660" y="0" width="92" height="28" uuid="ba31a103-66cd-4cff-af50-dab4124a5d0b"/>
+					<textElement textAlignment="Right"/>
+					<text><![CDATA[รวมเงินทั้งสิ้น]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="30" y="0" width="130" height="28" uuid="12bab223-8d36-47cc-8d89-6682f2ba1b84"/>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[ประเภทค่าบริการ]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Prevent">
+			<printWhenExpression><![CDATA[$F{paymentUser}!=null]]></printWhenExpression>
+			<frame>
+				<reportElement x="0" y="0" width="752" height="28" isPrintWhenDetailOverflows="true" uuid="885dc729-d0a6-43ae-a16a-e5f680d8915b"/>
+				<textField>
+					<reportElement x="260" y="0" width="110" height="28" uuid="26b98470-2fe2-46d3-b763-5bcedaa5c084"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{sumCancelAmount}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="370" y="0" width="100" height="28" uuid="33e06daf-a63c-48cd-8e3e-3e1e7f6e60a5"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{sumReceipt}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="470" y="0" width="99" height="28" uuid="a5f1d2e6-39b1-492d-ad3a-c5b93ba672ab"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{sumAmount}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="569" y="0" width="91" height="28" uuid="a6b60abc-0a40-49ce-94dc-93f675acf547"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{sumTotalReceipt}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="660" y="0" width="92" height="28" uuid="e0992cfa-0ae5-4341-8b83-eef680ee5d58"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{sumTotalAmount}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="30" height="28" uuid="9a79d8cf-cdaa-405a-a0b1-fef45b4c40be"/>
+					<textFieldExpression><![CDATA[$V{userGroup_COUNT}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="160" y="0" width="100" height="28" uuid="7d16df7d-dc5f-4d9d-8583-3a6e4214e388"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{sumCancelReceipt}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="30" y="0" width="130" height="28" uuid="5468bcf5-ff75-4d6e-8409-0a0077e0e015"/>
+					<textFieldExpression><![CDATA[$F{paymentMessage}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

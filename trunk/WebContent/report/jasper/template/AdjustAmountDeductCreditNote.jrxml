@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AdjustAmountDeductTax" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a7b54c96-7629-428d-8448-bfe911b9ba52">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<leftPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<rightPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="Table 1_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<leftPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<rightPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="Table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<leftPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<rightPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="Cat_Bg_Title" isDefault="true" mode="Opaque" backcolor="#808080" fill="Solid" fontName="FreesiaUPC" fontSize="16" isBold="true"/>
+	<style name="Cat_Bt_Title" mode="Opaque" forecolor="#000000" fill="Solid" fontName="FreesiaUPC" fontSize="16" isBold="true"/>
+	<style name="Cat_Wt_Title" mode="Opaque" forecolor="#000000" backcolor="#FFFFFF" fill="Solid" fontName="FreesiaUPC" fontSize="14" isBold="true"/>
+	<style name="Cat_Hl_Common" forecolor="#000000" fill="Solid" fontName="FreesiaUPC" fontSize="12" isBold="true"/>
+	<style name="Cat_Ct_Common" forecolor="#000000" fill="Solid" fontName="FreesiaUPC" fontSize="12"/>
+	<subDataset name="AdjustAmountDeductCreditNoteDs" uuid="ff0d4523-1953-4f6a-a486-d19a24be8ed9">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="no" class="java.lang.String"/>
+		<field name="invoiceNo" class="java.lang.String"/>
+		<field name="prodName" class="java.lang.String"/>
+		<field name="amount" class="java.lang.String"/>
+		<field name="billCycle" class="java.lang.String"/>
+		<field name="adjustAmount" class="java.lang.String"/>
+		<field name="correctAmount" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="AdjustmentAmountDsList" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="custName" class="java.lang.String"/>
+	<parameter name="custNo" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="taxId" class="java.lang.String"/>
+	<parameter name="branch" class="java.lang.String"/>
+	<parameter name="amountAdjustNo" class="java.lang.String"/>
+	<parameter name="amountAdjustDate" class="java.lang.String"/>
+	<parameter name="refNo" class="java.lang.String"/>
+	<parameter name="adjustReason" class="java.lang.String"/>
+	<parameter name="amountThai" class="java.lang.String"/>
+	<parameter name="branchAdjust" class="java.lang.String"/>
+	<parameter name="branchAdjustName" class="java.lang.String"/>
+	<parameter name="receiptAmount" class="java.lang.String"/>
+	<parameter name="adjustAmountTotalCorrect" class="java.lang.String"/>
+	<parameter name="adjustAmountTotalDif" class="java.lang.String"/>
+	<parameter name="adjustAmountTotalDifVat" class="java.lang.String"/>
+	<parameter name="adjustAmountTotal" class="java.lang.String"/>
+	<parameter name="invoiceNo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="57" splitType="Stretch">
+			<staticText>
+				<reportElement style="Cat_Wt_Title" x="200" y="0" width="150" height="15" uuid="c053ec7a-2d40-4b34-90e2-8ee1cf94cb0b"/>
+				<textElement textAlignment="Center">
+					<font fontName="FreesiaUPC" size="14"/>
+				</textElement>
+				<text><![CDATA[บริษัท กสท โทรคมนาคม จำกัด(มหาชน)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cat_Ct_Common" x="150" y="17" width="266" height="13" uuid="279824b1-6d61-4bc1-ba67-614ae636448a"/>
+				<text><![CDATA[99 ถนนแจ้งวัฒนะ แขวงทุ่งสองห้อง เขตหลักสี่ กรุงเทพมหานคร 10210]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cat_Ct_Common" x="128" y="35" width="316" height="13" uuid="bfa0d143-18e7-4445-a3c1-79b953a88174"/>
+				<text><![CDATA[เลขประจำตัวผู้เสียภาษีอากร 0107546000229 ทะเบียนเลขที่ 0107546000229]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="135" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="13" y="25" width="71" height="15" uuid="5edd6e0c-2da4-4975-a129-544666f51bd0">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="FreesiaUPC" size="12"/>
+				</textElement>
+				<text><![CDATA[เลขที่ลูกค้า    :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="13" y="43" width="70" height="15" uuid="f26bde83-73d9-42ed-bb2e-aed8644dcf67">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="FreesiaUPC" size="12"/>
+				</textElement>
+				<text><![CDATA[ชื่อ               :]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Cat_Ct_Common" x="83" y="43" width="100" height="15" uuid="d00e7d46-9928-417e-9e29-bdd2ccf860ab">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{custName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Cat_Ct_Common" x="84" y="26" width="100" height="15" uuid="2839e3f4-31e9-4560-8366-effb89660ce2">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="FreesiaUPC"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{custNo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="15" y="61" width="71" height="15" uuid="5f55ac80-be81-4462-9804-4e8304fbdac9">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[ที่อยู่            :]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Cat_Ct_Common" x="83" y="60" width="321" height="30" uuid="5f38fd12-3f51-4aed-bcf1-ccdd9730c3a8"/>
+				<textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="14" y="95" width="70" height="15" uuid="380a0af1-c6fd-4b0d-9f61-5bc709daebcb"/>
+				<text><![CDATA[Tax ID          :]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Cat_Ct_Common" x="83" y="95" width="100" height="15" uuid="e3b5786d-4976-41c4-8027-258181b99f10"/>
+				<textFieldExpression><![CDATA[$P{taxId}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="15" y="112" width="69" height="19" uuid="15f7cda3-3b3c-4fa3-a3f6-6c6fa1d6efcc">
+					<printWhenExpression><![CDATA[$P{branch} != null && $P{branch} != ""]]></printWhenExpression>
+				</reportElement>
+				<text><![CDATA[สาขาที่         :]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Cat_Ct_Common" x="83" y="113" width="100" height="15" uuid="c9bd11a1-a2ca-4495-9e2e-861b80e6c99e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<printWhenExpression><![CDATA[$P{branch} != null && $P{branch} != ""]]></printWhenExpression>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{branch}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="321" y="17" width="100" height="15" uuid="c00e01cf-89cb-44e3-a7aa-f0892c9e442a">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="FreesiaUPC"/>
+				</textElement>
+				<text><![CDATA[เลขที่ใบลดหนี้           :]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Cat_Ct_Common" x="421" y="18" width="135" height="15" uuid="0df4448a-98fa-44c4-98ba-9df1f7c897af">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="FreesiaUPC"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{amountAdjustNo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="321" y="31" width="100" height="15" uuid="0a1e0805-b018-478b-83e7-2aca0b192573">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[วันที่                        :]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Cat_Ct_Common" x="421" y="31" width="114" height="15" uuid="a23b9dc5-4e54-46b5-b241-9f29c2555ca4">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{amountAdjustDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Cat_Ct_Common" x="321" y="0" width="214" height="15" uuid="9dc8a4e0-d744-4896-94d2-6e17ff2a3cd8">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{branchAdjust}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Cat_Wt_Title" x="6" y="3" width="150" height="15" uuid="c9803ff7-027b-4d24-bf78-b0b700dc5bf9"/>
+				<textElement textAlignment="Center">
+					<font fontName="FreesiaUPC" size="14"/>
+				</textElement>
+				<text><![CDATA[ใบลดหนี้ทางการค้า (Credit Note)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="294" y="47" width="120" height="11" uuid="a179c06d-99c7-42da-a5e8-f15714c627c7">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[เลขที่ใบแจ้งค่าใช้บริการ        :]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Cat_Ct_Common" x="421" y="46" width="100" height="12" uuid="4c46b215-ff03-4c44-97df-b27eaae762fb"/>
+				<textFieldExpression><![CDATA[$P{invoiceNo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="130" splitType="Stretch">
+			<componentElement>
+				<reportElement mode="Transparent" x="21" y="5" width="510" height="120" uuid="fb871e92-b82f-4843-a383-59d4dd324fb3">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 1_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 1_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table 1_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="AdjustAmountDeductCreditNoteDs" uuid="37f9b7df-98fa-4620-b7c6-c7520099524d">
+						<dataSourceExpression><![CDATA[$P{AdjustmentAmountDsList}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="30" uuid="c8cf3115-8e37-405c-b641-28e5acf76392">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:tableHeader style="Table 1_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement style="Cat_Hl_Common" x="0" y="0" width="30" height="30" uuid="191cf30e-47d2-445c-a523-86f481fe47e8"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[ลำดับ]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnFooter style="Table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement style="Cat_Ct_Common" x="0" y="0" width="30" height="30" uuid="58222c14-8df0-4628-985c-c7d9f6df53a0"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{no}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="110" uuid="b935ca87-3811-419d-9419-d855e58db392">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:tableHeader style="Table 1_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement style="Cat_Hl_Common" x="0" y="0" width="110" height="30" uuid="28d13c9b-7b5d-4270-9d68-2e7dd035bdd2"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[รายการ]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnFooter style="Table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement style="Cat_Ct_Common" x="0" y="0" width="110" height="30" uuid="3c1be160-afda-424f-99d1-cbea8943dc3e"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{prodName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="120" uuid="8318ec8b-740c-4689-8b51-750b003ad35b">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:tableHeader style="Table 1_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement style="Cat_Hl_Common" x="0" y="0" width="120" height="30" uuid="97ffa31f-a62c-423e-bd16-f44f13c54adf"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[รอบการใช้งาน]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnFooter style="Table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement style="Cat_Ct_Common" x="0" y="0" width="120" height="30" uuid="05173866-7a03-4b8a-bb86-8b737b22c1ec"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{billCycle}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="dbb83b1a-fca6-4d80-9f99-35d7ff7dad15">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:tableHeader style="Table 1_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement style="Cat_Hl_Common" x="0" y="0" width="80" height="30" uuid="731db704-0aaa-4cc4-bbb9-2a83b08ff4f4"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[จำนวนเงินเดิม]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnFooter style="Table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement style="Cat_Ct_Common" x="0" y="0" width="80" height="30" uuid="32c57bcc-cfdf-49dd-8dd8-6f85a1c31488"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="31398ffc-5057-4494-a72d-98210014bc71">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:tableHeader style="Table 1_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement style="Cat_Hl_Common" x="0" y="0" width="80" height="30" uuid="ec576a63-e395-4cc0-8c01-4235990c9ad7"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[จำนวนเงินที่ถูกต้อง]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						</jr:tableFooter>
+						<jr:columnFooter style="Table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement style="Cat_Ct_Common" x="0" y="0" width="80" height="30" uuid="59a0357f-b62e-4e03-9c36-5fe06da8f7b7">
+									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+								</reportElement>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{correctAmount}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="e3acf14b-b7ce-4db2-ba5b-f361c2e31b9a">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:tableHeader style="Table 1_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement style="Cat_Hl_Common" x="0" y="0" width="80" height="30" uuid="266bed62-6e57-40e4-a3ff-bdb548bcfee0"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[จำนวนเงินส่วนต่าง]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						</jr:tableFooter>
+						<jr:columnFooter style="Table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement style="Cat_Ct_Common" x="0" y="0" width="80" height="30" uuid="b53b5ca0-bc9c-4b79-8d6b-f488100cae82"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{adjustAmount}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<summary>
+		<band height="145" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="33" y="16" width="100" height="30" uuid="9c5916b3-9d76-4147-ad3c-98645f1b3f4a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[เหตุผล (Reason)  :]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Cat_Ct_Common" x="70" y="35" width="240" height="30" uuid="174815e9-1c3b-4286-abcb-eb70368fc912"/>
+				<textFieldExpression><![CDATA[$P{adjustReason}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Cat_Ct_Common" x="70" y="70" width="237" height="30" uuid="f6ce07e7-129a-4252-8990-45ddbd9fa708">
+					<printWhenExpression><![CDATA[true == false]]></printWhenExpression>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{amountThai}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Cat_Ct_Common" x="205" y="110" width="146" height="10" uuid="318b4779-66a6-4899-aef4-49c8c3800ee8"/>
+				<text><![CDATA[.................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cat_Ct_Common" x="228" y="120" width="100" height="10" uuid="7aadd2a6-0a77-44fb-bc3a-aa4091980e6e"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[ผู้จัด / Prepared By]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="316" y="20" width="152" height="21" uuid="6721dd5f-b00d-4d0d-b51f-a43a091ab952"/>
+				<text><![CDATA[ จำนวนเงินส่วนต่างรวม (Total Amount) : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="369" y="44" width="100" height="30" uuid="1db4d109-6e63-4e49-9c6e-c79f65048fd4"/>
+				<text><![CDATA[ภาษีมูลค่าเพิ่ม (VAT 7%) :  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="301" y="62" width="167" height="12" uuid="4f3ecff5-e2f2-431d-896f-e63d33de0459"/>
+				<text><![CDATA[จำนวนเงินส่วนต่างรวมทั้งสิ้น (Total Charge) : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Cat_Ct_Common" x="471" y="18" width="100" height="19" uuid="6abf53b1-7517-4714-b250-2423fd0745a7"/>
+				<textFieldExpression><![CDATA[$P{adjustAmountTotalDif}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Cat_Ct_Common" x="471" y="42" width="100" height="10" uuid="3cd25718-3a8d-46af-8957-80a744f4862b"/>
+				<textFieldExpression><![CDATA[$P{adjustAmountTotalDifVat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Cat_Ct_Common" x="469" y="62" width="100" height="12" uuid="7753cc17-98b8-4215-b7b8-d761a1bfd059"/>
+				<textFieldExpression><![CDATA[$P{adjustAmountTotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DairyChequePayment" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="b8b851f0-b7be-4587-93aa-a6e647ce813c">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="160"/>
+	<style name="Cat_Bg_Title" isDefault="true" mode="Opaque" backcolor="#808080" fill="Solid" vAlign="Middle" fontName="FreesiaUPC" fontSize="16" isBold="true"/>
+	<style name="Cat_Bt_Title" isDefault="true" mode="Opaque" forecolor="#000000" fill="Solid" vAlign="Middle" fontName="FreesiaUPC" fontSize="16" isBold="true"/>
+	<style name="Cat_Wt_Title" isDefault="true" mode="Opaque" forecolor="#000000" backcolor="#FFFFFF" fill="Solid" vAlign="Middle" fontName="FreesiaUPC" fontSize="16" isBold="true"/>
+	<style name="Cat_Hl_Common" isDefault="true" forecolor="#000000" fill="Solid" vAlign="Middle" fontName="FreesiaUPC" fontSize="14" isBold="true"/>
+	<style name="Cat_Ct_Common" isDefault="true" forecolor="#000000" fill="Solid" vAlign="Middle" fontName="FreesiaUPC" fontSize="12"/>
+	<parameter name="ReportSource" class="th.net.cat.epis.to.report.DailyPaymentTO"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="paymentDate" class="java.lang.String"/>
+	<field name="paymentTime" class="java.lang.String">
+		<fieldDescription><![CDATA[paymentTime]]></fieldDescription>
+	</field>
+	<field name="receiptNo" class="java.lang.String">
+		<fieldDescription><![CDATA[receiptNo]]></fieldDescription>
+	</field>
+	<field name="receiptName" class="java.lang.String">
+		<fieldDescription><![CDATA[receiptName]]></fieldDescription>
+	</field>
+	<field name="sumAmt" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[sumAmt]]></fieldDescription>
+	</field>
+	<field name="chequeNo" class="java.lang.String">
+		<fieldDescription><![CDATA[chequeNo]]></fieldDescription>
+	</field>
+	<field name="branchCode" class="java.lang.String">
+		<fieldDescription><![CDATA[branchCode]]></fieldDescription>
+	</field>
+	<field name="branchName" class="java.lang.String">
+		<fieldDescription><![CDATA[branchName]]></fieldDescription>
+	</field>
+	<field name="remark" class="java.lang.String">
+		<fieldDescription><![CDATA[remark]]></fieldDescription>
+	</field>
+	<variable name="sumAmt_1" class="java.math.BigDecimal" resetType="Group" resetGroup="paymentDateGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{sumAmt}]]></variableExpression>
+	</variable>
+	<filterExpression><![CDATA[$F{paymentDate}!=null]]></filterExpression>
+	<group name="paymentDateGroup" isStartNewColumn="true" keepTogether="true">
+		<groupExpression><![CDATA[$F{paymentDate}]]></groupExpression>
+		<groupFooter>
+			<band height="28" splitType="Prevent">
+				<frame>
+					<reportElement x="0" y="1" width="752" height="24" isRemoveLineWhenBlank="true" uuid="01d5f0f8-0f4d-4bf7-ab2c-6b288bb267fa"/>
+					<box>
+						<topPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75" lineStyle="Double"/>
+					</box>
+					<textField>
+						<reportElement x="125" y="2" width="135" height="20" uuid="f55355f4-b25b-4be2-99e1-9e444403c90e"/>
+						<textFieldExpression><![CDATA["รวมตามวันที่รับชำระ "+$F{paymentDate}]]></textFieldExpression>
+					</textField>
+					<textField pattern="#,##0.00">
+						<reportElement x="381" y="2" width="92" height="20" uuid="c8527b83-6ee8-446c-9180-f60fb7ae103c"/>
+						<textElement textAlignment="Right"/>
+						<textFieldExpression><![CDATA[$V{sumAmt_1}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="260" y="2" width="121" height="20" uuid="c9cab2d8-2d98-4277-a3d2-05930e02c022"/>
+						<textFieldExpression><![CDATA["( จำนวนรายการ "+$V{paymentDateGroup_COUNT}+" )"]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Prevent">
+			<printWhenExpression><![CDATA[$F{paymentDate}!=null]]></printWhenExpression>
+		</band>
+	</background>
+	<pageHeader>
+		<band height="106" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="10" width="752" height="24" uuid="8131e5f3-b6d1-4b75-9e85-a607021d6c11"/>
+				<staticText>
+					<reportElement x="260" y="0" width="240" height="24" uuid="b89bc298-ac50-4026-af6a-65572a020a17">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box topPadding="2" bottomPadding="0"/>
+					<textElement textAlignment="Center">
+						<font fontName="FreesiaUPC"/>
+						<paragraph leftIndent="1"/>
+					</textElement>
+					<text><![CDATA[รายงานการปิดบัญชีประจำวัน]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="580" y="0" width="60" height="24" uuid="f6c8f665-efac-447b-b94c-50c4bd62a8f1">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box topPadding="2" bottomPadding="0"/>
+					<textElement textAlignment="Right">
+						<font fontName="FreesiaUPC"/>
+						<paragraph leftIndent="1"/>
+					</textElement>
+					<text><![CDATA[หน้าที่]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="650" y="0" width="20" height="24" uuid="e064aea7-2b7d-4ba0-98b5-0adf20008fc4"/>
+					<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Report">
+					<reportElement x="670" y="0" width="80" height="24" uuid="e235087b-c87c-4b42-813f-b8db4bb97621"/>
+					<textFieldExpression><![CDATA["/ "+ $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="0" y="34" width="752" height="24" uuid="55611229-deeb-4579-ac81-b775a222f679"/>
+				<staticText>
+					<reportElement x="0" y="0" width="177" height="24" uuid="38aaca1b-7b1c-47cd-8478-b21e0c7c6137">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box topPadding="2" bottomPadding="0"/>
+					<textElement textAlignment="Left">
+						<font fontName="FreesiaUPC"/>
+						<paragraph leftIndent="1"/>
+					</textElement>
+					<text><![CDATA[บริษัท กสท โทรคมนาคม จำกัด (มหาชน)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="260" y="0" width="58" height="24" uuid="f1f70505-4fa1-42ca-be97-1f2ea8f95d14">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box topPadding="2" bottomPadding="0"/>
+					<textElement textAlignment="Center">
+						<font fontName="FreesiaUPC"/>
+						<paragraph leftIndent="1"/>
+					</textElement>
+					<text><![CDATA[ประจำวันที่]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="580" y="0" width="60" height="24" uuid="b556c307-d209-4bc2-9d2c-1bce0d4f04f1">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box topPadding="2" bottomPadding="0"/>
+					<textElement textAlignment="Right">
+						<font fontName="FreesiaUPC"/>
+						<paragraph leftIndent="1"/>
+					</textElement>
+					<text><![CDATA[วันเวลาพิมพ์]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="650" y="0" width="101" height="24" uuid="daa6a9da-6576-46c0-8a7a-ed1b98bcef14"/>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA[$P{ReportSource}.getDocumentDate()]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="318" y="0" width="209" height="24" uuid="1ff7c6f9-1c9a-4262-bfd1-d5a17a07a288"/>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA[$P{ReportSource}.getPaymentDate()]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="0" y="58" width="752" height="24" uuid="3b772bb1-708a-49d8-9641-af9ee28df706"/>
+				<staticText>
+					<reportElement x="0" y="0" width="80" height="24" uuid="4f2e2fc2-1ca9-4b1f-be9f-0a92f2b81c65">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box topPadding="2" bottomPadding="0"/>
+					<textElement textAlignment="Left">
+						<font fontName="FreesiaUPC"/>
+						<paragraph leftIndent="1"/>
+					</textElement>
+					<text><![CDATA[ชื่อสถานประกอบการ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="90" y="0" width="190" height="24" uuid="bb8b4237-a3a0-4da8-b25c-c88cde5addaa"/>
+					<textFieldExpression><![CDATA[$P{ReportSource}.getBranchName()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="280" y="0" width="200" height="24" uuid="e4a1cf81-55ab-4e3b-9467-86be341bcdbf">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box topPadding="2" bottomPadding="0"/>
+					<textElement textAlignment="Center">
+						<font fontName="FreesiaUPC"/>
+						<paragraph leftIndent="1"/>
+					</textElement>
+					<text><![CDATA[เลขประจำตัวผู้เสียภาษีอากร 0107546000229]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement x="0" y="82" width="752" height="24" uuid="c4cd766e-6830-4e37-8167-c65649b37345"/>
+			</frame>
+			<frame>
+				<reportElement x="0" y="82" width="752" height="24" uuid="49ef5d16-c402-495e-989e-0dcd45d21ec3"/>
+				<staticText>
+					<reportElement x="538" y="0" width="60" height="24" uuid="35e71480-d8cf-4e9b-884d-15ada8cccf71">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box topPadding="2" bottomPadding="0"/>
+					<textElement textAlignment="Right">
+						<font fontName="FreesiaUPC"/>
+						<paragraph leftIndent="1"/>
+					</textElement>
+					<text><![CDATA[เจ้าหน้าที่]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="602" y="0" width="148" height="24" uuid="040e9f9d-a7c0-4bc6-8965-88dcaccee97e"/>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA[$P{ReportSource}.getUserName()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="29" splitType="Prevent">
+			<frame>
+				<reportElement x="0" y="0" width="752" height="28" uuid="84013787-b871-40e5-8fc6-59569c397509"/>
+				<box>
+					<topPen lineWidth="1.2" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.2" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<staticText>
+					<reportElement x="0" y="0" width="28" height="28" uuid="47de2311-1445-438f-beaf-bf9d274c7c32"/>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[ลำดับที่]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="28" y="0" width="62" height="28" uuid="b76932fc-df2d-45f4-bf51-4b9010c8ed63"/>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[วันที่ี่รับชำระ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="90" y="0" width="35" height="28" uuid="68697875-dfff-418c-9d87-2e8f55ff75fe"/>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[เวลา]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="125" y="0" width="112" height="28" uuid="bdd25d80-d3b6-4dcb-8940-20e99f51daa9"/>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[เลขที่ใบกำกับ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="237" y="0" width="160" height="28" uuid="981a92c6-9735-4e78-a574-782a81c0fbf7"/>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[ชื่อผู้รับสินค้า/ผู้รับบริการ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="410" y="0" width="63" height="28" uuid="742a2c10-2285-4d70-be9b-f86e2179b345"/>
+					<textElement textAlignment="Right"/>
+					<text><![CDATA[เงินเช็ค]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="480" y="0" width="58" height="28" uuid="62dce1f8-18cf-4533-8c6c-ac689dfb15ad"/>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[เลขที่เช็ค]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="538" y="0" width="48" height="28" uuid="fb13a31b-57b6-4208-afc9-57a304fbedb4"/>
+					<text><![CDATA[สาขาของเช็ค]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="586" y="0" width="102" height="28" uuid="61e60172-ad24-489f-bb02-d1574032a2fc"/>
+					<text><![CDATA[เช็คของธนาคาร]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="688" y="0" width="62" height="28" uuid="05b27533-5786-4540-a22c-f0a1998916a0"/>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[หมายเหตุ]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Prevent">
+			<frame>
+				<reportElement x="0" y="0" width="752" height="28" isPrintWhenDetailOverflows="true" uuid="885dc729-d0a6-43ae-a16a-e5f680d8915b"/>
+				<textField>
+					<reportElement x="0" y="0" width="28" height="28" uuid="0e71e179-0f1b-4396-84a1-c1b947bd61b6"/>
+					<textFieldExpression><![CDATA[$V{paymentDateGroup_COUNT}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="28" y="0" width="58" height="28" uuid="04980d3a-e871-4896-bbbd-71bbee79e287"/>
+					<textFieldExpression><![CDATA[$F{paymentDate}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="586" y="1" width="102" height="27" uuid="4f864df5-2d97-47fe-9267-1eb124d78a4f"/>
+					<textFieldExpression><![CDATA[$F{branchName}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="84" y="0" width="39" height="28" uuid="f55fd202-cdee-4756-ab2c-c1a587c2b084"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{paymentTime}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="125" y="0" width="112" height="28" uuid="a3d26eb3-9000-4e0f-97c8-0686c3a875c1"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{receiptNo}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="237" y="0" width="160" height="28" uuid="6a46b6ea-fbb9-488c-8229-6f6435c3f5ef"/>
+					<textFieldExpression><![CDATA[$F{receiptName}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="473" y="1" width="65" height="27" uuid="a2a17795-7f26-49c8-be7f-e344c244bbf4"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{chequeNo}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="538" y="1" width="48" height="27" uuid="1d10afb6-7fed-45d0-9a42-48225d722f85"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{branchCode}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement x="397" y="1" width="76" height="27" uuid="4120f513-77ea-41fe-af6f-40d19958472d"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{sumAmt}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="688" y="1" width="62" height="27" uuid="24543dea-2f17-472f-a693-7021ea40081c"/>
+					<textFieldExpression><![CDATA[$F{remark}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

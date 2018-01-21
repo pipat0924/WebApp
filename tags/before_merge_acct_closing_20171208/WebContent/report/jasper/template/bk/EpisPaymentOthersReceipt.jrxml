@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version last-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EpisPaymentOthersReceipt" pageWidth="595" pageHeight="421" orientation="Landscape" columnWidth="540" leftMargin="30" rightMargin="25" topMargin="20" bottomMargin="20" uuid="33e3bc42-8079-4e44-a081-33c81961e519">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<style name="Cat_Bg_Title" isDefault="true" mode="Opaque" backcolor="#808080" fill="Solid" vAlign="Middle" fontName="FreesiaUPC" fontSize="16" isBold="true"/>
+	<style name="Cat_Bt_Title" isDefault="true" mode="Opaque" forecolor="#000000" fill="Solid" vAlign="Middle" fontName="FreesiaUPC" fontSize="16" isBold="true"/>
+	<style name="Cat_Wt_Title" isDefault="true" mode="Opaque" forecolor="#000000" backcolor="#FFFFFF" fill="Solid" vAlign="Middle" fontName="FreesiaUPC" fontSize="14" isBold="true"/>
+	<style name="Cat_Hl_Common" isDefault="true" forecolor="#000000" fill="Solid" vAlign="Middle" fontName="FreesiaUPC" fontSize="12" isBold="true"/>
+	<style name="Cat_Ct_Common" isDefault="true" forecolor="#000000" fill="Solid" vAlign="Middle" fontName="FreesiaUPC" fontSize="12"/>
+	<parameter name="ReportSource" class="th.net.cat.epis.to.report.CustomerTaxReceiptForOthersPaymentTO"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="orderNo" class="java.lang.String">
+		<fieldDescription><![CDATA[orderNo]]></fieldDescription>
+	</field>
+	<field name="productType" class="java.lang.String">
+		<fieldDescription><![CDATA[productType]]></fieldDescription>
+	</field>
+	<field name="productName" class="java.lang.String">
+		<fieldDescription><![CDATA[productName]]></fieldDescription>
+	</field>
+	<field name="amount" class="java.lang.String">
+		<fieldDescription><![CDATA[amount]]></fieldDescription>
+	</field>
+	<field name="vat" class="java.lang.String">
+		<fieldDescription><![CDATA[vat]]></fieldDescription>
+	</field>
+	<field name="discount" class="java.lang.String">
+		<fieldDescription><![CDATA[discount]]></fieldDescription>
+	</field>
+	<field name="wat" class="java.lang.String">
+		<fieldDescription><![CDATA[wat]]></fieldDescription>
+	</field>
+	<field name="totalSum" class="java.lang.String">
+		<fieldDescription><![CDATA[totalSum]]></fieldDescription>
+	</field>
+	<field name="amountBeforeVatAfterDiscount" class="java.lang.String">
+		<fieldDescription><![CDATA[amountBeforeVatAfterDiscount]]></fieldDescription>
+	</field>
+	<pageHeader>
+		<band height="114">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="0" y="36" width="78" height="13" uuid="d7ae7bce-e1f4-4278-9206-2f0e92eba539">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<paragraph leftIndent="1"/>
+				</textElement>
+				<text><![CDATA[เลขที่ลูกค้า :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="0" y="49" width="78" height="13" uuid="dae461cc-50ca-40a7-961c-54281865b90b"/>
+				<textElement textAlignment="Right">
+					<paragraph leftIndent="1"/>
+				</textElement>
+				<text><![CDATA[ชื่อ :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="0" y="62" width="78" height="13" uuid="109e2ab5-e94d-43f9-bd17-7d6fcc5d631e"/>
+				<textElement textAlignment="Right">
+					<paragraph leftIndent="1"/>
+				</textElement>
+				<text><![CDATA[ที่อยู่ :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="0" y="75" width="78" height="13" uuid="f752e965-3f99-4809-8f37-e1f55a2906a6"/>
+				<textElement textAlignment="Right">
+					<paragraph leftIndent="1"/>
+				</textElement>
+				<text><![CDATA[ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="0" y="75" width="78" height="13" uuid="d9fa8da0-d940-4d18-97ba-b4b9fd47a6a0">
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<paragraph leftIndent="1"/>
+				</textElement>
+				<text><![CDATA[Tax ID :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="0" y="101" width="78" height="13" uuid="45fcdc0f-f19c-42e2-9637-093529009991">
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<paragraph leftIndent="1"/>
+				</textElement>
+				<text><![CDATA[ชำระด้วย :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="340" y="23" width="78" height="13" uuid="b9769a90-b23c-4d68-8114-39ac14afa89a"/>
+				<textElement textAlignment="Right">
+					<paragraph leftIndent="1"/>
+				</textElement>
+				<text><![CDATA[หน้า :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="340" y="49" width="78" height="13" uuid="78215f6c-7208-44ad-bdc0-28efe30f24bb"/>
+				<textElement textAlignment="Right">
+					<paragraph leftIndent="1"/>
+				</textElement>
+				<text><![CDATA[เลขที่ :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="340" y="62" width="78" height="13" uuid="a945e7ef-ac56-4849-b1cd-1f06d791cb6c"/>
+				<textElement textAlignment="Right">
+					<paragraph leftIndent="1"/>
+				</textElement>
+				<text><![CDATA[วันที่ออก :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Cat_Ct_Common" x="80" y="36" width="140" height="13" uuid="3119aa19-65a8-4809-bc8d-0e0c3b39806c"/>
+				<textFieldExpression><![CDATA[$P{ReportSource}.getCustomerNo()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Cat_Ct_Common" x="80" y="49" width="256" height="13" uuid="f68b4bcc-f0c2-40aa-ac7f-3b094cc607fa"/>
+				<textFieldExpression><![CDATA[$P{ReportSource}.getCustomerName()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Cat_Ct_Common" x="80" y="62" width="256" height="13" uuid="82e7e3e4-e2b9-4a69-8a84-3c401fb4e797"/>
+				<textFieldExpression><![CDATA[$P{ReportSource}.getAddressLine1()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Cat_Ct_Common" x="80" y="75" width="256" height="13" uuid="5a776a2c-273e-4e6c-b123-bd56c5659781">
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{ReportSource}.getTaxId()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Cat_Ct_Common" x="80" y="101" width="256" height="13" uuid="f3e9bb83-0567-4b6b-85ec-f02ffc9380ac">
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{ReportSource}.getPaymentType()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Cat_Ct_Common" x="420" y="23" width="10" height="13" uuid="118d988f-79e5-4fcf-9823-bb80eadb0986"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Cat_Ct_Common" x="430" y="23" width="109" height="13" uuid="97e512d7-e1e4-4e47-ac70-e3e94b5c05be"/>
+				<textFieldExpression><![CDATA[" / " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="220" y="36" width="320" height="13" uuid="8ce2271b-403a-4d03-91f7-1c30ca56f21f"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ReportSource}.getBranchName()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="420" y="49" width="120" height="13" uuid="af2dd1b4-6a36-4693-b83b-60ef732b8779"/>
+				<textFieldExpression><![CDATA[$P{ReportSource}.getDocumentNo()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="420" y="62" width="120" height="13" uuid="e6bbc455-c4fb-4d21-9ed5-49e76c360575"/>
+				<textFieldExpression><![CDATA[$P{ReportSource}.getDocumentDate()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Cat_Wt_Title" x="0" y="0" width="540" height="23" uuid="439a6400-1a4c-43d9-baa4-01da9ce0674c">
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{ReportSource}.getReceiptType().equalsIgnoreCase("FULL")? "ใบเสร็จรับเงิน/ใบกำกับภาษี" : "ใบเสร็จรับเงิน/ใบกำกับภาษีแบบย่อ"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Cat_Ct_Common" x="80" y="88" width="256" height="13" uuid="b88cdf05-da22-4835-b5f9-f02c4c1cb83c">
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[$P{ReportSource}.getCustomerType() != null && !$P{ReportSource}.getCustomerType().equals("I")]]></printWhenExpression>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{ReportSource}.getBranchPayment()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="0" y="88" width="78" height="13" isRemoveLineWhenBlank="true" uuid="e96fb4bd-32d2-44e1-b5b9-e99e8444b846">
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[$P{ReportSource}.getCustomerType() != null && !$P{ReportSource}.getCustomerType().equals("I")]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<paragraph leftIndent="1"/>
+				</textElement>
+				<text><![CDATA[สาขาที่ :]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="29" splitType="Prevent">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<frame>
+				<reportElement x="0" y="4" width="540" height="25" uuid="3a22632a-6aca-47c0-8f2c-07a052120611">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<staticText>
+					<reportElement style="Cat_Hl_Common" x="0" y="0" width="39" height="20" uuid="3e57c420-34f3-4e11-b336-76b9a8b4eea8"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[ลำดับที่]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Cat_Hl_Common" x="39" y="0" width="161" height="20" uuid="9baee3df-8c53-4334-8f5c-ecda57662dff">
+						<property name="local_mesure_unitx" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[ชื่อบริการ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Cat_Hl_Common" x="200" y="0" width="70" height="25" uuid="51ec9eb8-1256-4691-b831-c8ef033bc080">
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<paragraph lineSpacing="Proportional" lineSpacingSize="3.0"/>
+					</textElement>
+					<text><![CDATA[จำนวนเงินก่อน  หักส่วนลด]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Cat_Hl_Common" x="270" y="0" width="60" height="20" uuid="8a51cd05-f2f3-4994-9a1f-d130543bce13">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="local_mesure_unitx" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<text><![CDATA[ส่วนลด]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Cat_Hl_Common" x="330" y="0" width="70" height="20" uuid="bd26da3a-e0f2-477c-9786-da151afdc8ae">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="local_mesure_unitx" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<text><![CDATA[จำนวนเงิน]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Cat_Hl_Common" x="400" y="0" width="60" height="20" uuid="122ecd9f-ef1b-4a60-af33-bc83513558e0">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<text><![CDATA[ภาษีมูลค่าเพิ่ม]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Cat_Hl_Common" x="460" y="0" width="80" height="20" uuid="65581f06-e9f5-48dc-98c6-3e83cb72dc21"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<text><![CDATA[รวมเงิน(บาท)]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Prevent">
+			<frame>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="540" height="15" isRemoveLineWhenBlank="true" uuid="335b53ab-a9fe-497d-9e4e-dc668ecd25e4">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[$F{orderNo} != null]]></printWhenExpression>
+				</reportElement>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="39" height="15" uuid="b4cc67f5-2f3c-4aad-96e9-c2304d463093"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{orderNo}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="FixRelativeToBottom" x="39" y="0" width="161" height="15" uuid="49970971-08eb-443b-a211-ba3463ffea64">
+						<property name="local_mesure_unitx" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{productName}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="FixRelativeToBottom" x="200" y="0" width="70" height="15" uuid="c9608a22-ab83-4874-a866-6a35f460f5c3"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="FixRelativeToBottom" x="270" y="0" width="60" height="15" uuid="e368ce02-3dde-40d5-8b27-2110768b206d">
+						<property name="local_mesure_unitx" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{discount}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="FixRelativeToBottom" x="330" y="0" width="70" height="15" uuid="eaf08b75-2277-4ebf-b9c0-1107d816e597">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="local_mesure_unitx" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{amountBeforeVatAfterDiscount}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="FixRelativeToBottom" x="400" y="0" width="60" height="15" uuid="faf40f96-899b-476c-89b0-450042661daa">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{vat}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="FixRelativeToBottom" x="460" y="0" width="80" height="15" uuid="32231e7f-af9c-4b5b-b152-a612238e8f19"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{totalSum}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="161">
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="330" y="20" width="149" height="13" uuid="ed924c50-a5cc-46f6-82f9-eeb45df6fa5d"/>
+				<textElement textAlignment="Right">
+					<paragraph leftIndent="1"/>
+				</textElement>
+				<text><![CDATA[จำนวนเงินก่อนหักส่วนลด : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="330" y="33" width="149" height="13" uuid="e920effc-50ce-4428-809c-09d0c2495ee3"/>
+				<textElement textAlignment="Right">
+					<paragraph leftIndent="1"/>
+				</textElement>
+				<text><![CDATA[ส่วนลด (Discount) : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="330" y="46" width="149" height="13" uuid="1b7fe448-60af-40c1-a58e-53c7ebcd996f"/>
+				<textElement textAlignment="Right">
+					<paragraph leftIndent="1"/>
+				</textElement>
+				<text><![CDATA[จำนวนเงินก่อนภาษีมูลค่าเพิ่ม (Charge) : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="330" y="59" width="149" height="13" uuid="0ad255d6-d95b-48b5-8869-3314986ac03c"/>
+				<textElement textAlignment="Right">
+					<paragraph leftIndent="1"/>
+				</textElement>
+				<text><![CDATA[ภาษีมูลค่าเพิ่ม (Vat 7%) : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="330" y="72" width="149" height="13" uuid="2611eaab-0693-4e8b-89aa-1109c1f0aa73"/>
+				<textElement textAlignment="Right">
+					<paragraph leftIndent="1"/>
+				</textElement>
+				<text><![CDATA[จำนวนเงินทั้งสิ้น (Total Charge) : ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Cat_Ct_Common" x="479" y="20" width="60" height="13" uuid="ce62de96-c9a5-4100-8805-4d156a935700"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{ReportSource}.getSummaryAmountBeforeVat()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Cat_Ct_Common" x="479" y="33" width="60" height="13" uuid="703e846a-5efa-433f-9332-0c813f68515f"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{ReportSource}.getSummaryDiscount()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Cat_Ct_Common" x="479" y="46" width="60" height="13" uuid="1c6aa912-bb91-49d9-885f-4634cdecc596"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{ReportSource}.getSummaryAmountSumBeforeVat()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Cat_Ct_Common" x="479" y="59" width="60" height="13" uuid="f764d960-e2a6-463f-99cb-b2b4c02b948f"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{ReportSource}.getSummaryVat()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Cat_Ct_Common" x="479" y="72" width="60" height="13" uuid="bdec6554-c393-4b69-8515-4889a8acc297"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{ReportSource}.getSummaryAmountSumAfterVat()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Cat_Ct_Common" x="0" y="98" width="400" height="13" uuid="ffe04a02-4bc4-4567-8102-68a0cdc32135">
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<paragraph leftIndent="1"/>
+				</textElement>
+				<text><![CDATA[ในกรณีชำระด้วยเช็ค ใบเสร็จรับเงิน/ใบกำกับภาษี จะมีผลสมบูรณ์ต่อเมือเรียกเก็บเงินตามเช็คได้แล้ว ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cat_Ct_Common" x="0" y="111" width="400" height="13" uuid="9e376130-9996-4a52-9eaa-66cca1f65c74">
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<paragraph leftIndent="1"/>
+				</textElement>
+				<text><![CDATA[อนึ่งผู้จ่ายเช็คขอรับรองว่า ได้ส่งเช็คในวันเดียวกับวันที่ระบุในใบกำกับภาษ๊ฉบับนี้จริง ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cat_Ct_Common" x="20" y="135" width="206" height="13" uuid="6023ea67-4401-43d9-aba5-306dd35a3daa">
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="local_mesure_unitx" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<paragraph leftIndent="1"/>
+				</textElement>
+				<text><![CDATA[ลงชื่อ .................................................... ผู้ส่งมอบเช็ค]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cat_Ct_Common" x="300" y="135" width="206" height="13" uuid="5aef3d24-7dc9-40c6-ae36-abab6cd7b165">
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="local_mesure_unitx" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<paragraph leftIndent="1"/>
+				</textElement>
+				<text><![CDATA[ลงชื่อ ........................................................ ผู้รับชำระ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="0" y="59" width="50" height="13" uuid="f8db4871-14de-4103-84b9-e19c6e6b278e">
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<paragraph leftIndent="1"/>
+				</textElement>
+				<text><![CDATA[หมายเหตุ :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cat_Hl_Common" x="0" y="33" width="50" height="13" uuid="3f0c74c1-abe7-4578-a207-445f8211bc35">
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[$P{ReportSource}.getPromotionTxt() != null || !$P{ReportSource}.getPromotionTxt().equals("")]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<paragraph leftIndent="1"/>
+				</textElement>
+				<text><![CDATA[โปรโมชั่น :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Cat_Ct_Common" x="50" y="59" width="239" height="13" uuid="433816cd-3c93-4f49-a281-3832eb873011">
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{ReportSource}.getNoteTxt()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Cat_Ct_Common" x="50" y="33" width="239" height="13" uuid="63cc23b4-27b9-49f2-ac11-f9adeb2bc986">
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{ReportSource}.getPromotionTxt()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Cat_Ct_Common" x="300" y="148" width="166" height="13" uuid="ba68940e-00c8-4ed2-93fe-66c2508354bf">
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["(" +$P{ReportSource}.getUserName()+ ")"]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+</jasperReport>
