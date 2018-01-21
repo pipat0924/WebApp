@@ -1,0 +1,84 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:http-conf="http://cxf.apache.org/transports/http/configuration"
+       xsi:schemaLocation="http://cxf.apache.org/transports/http/configuration
+           http://cxf.apache.org/schemas/configuration/http-conf.xsd
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+ 
+<!--  	<http-conf:conduit name="{http://cxf.apache.org}TransportURIResolver.http-conduit"> -->
+<!--  		<http-conf:client AllowChunking="false" ConnectionTimeout="300" ReceiveTimeout="400"/> -->
+<!--  	</http-conf:conduit> -->
+ 
+	<http-conf:conduit createdFromAPI="true" name="{http://F01_RetrieveInvoiceHeader/F01_RetrieveInvoiceHeaderSI}F01_RetrieveInvoiceHeaderSIExport1_F01_RetrieveInvoiceHeaderSIHttpPort.http-conduit">
+     	<http-conf:client AllowChunking="false" ConnectionTimeout="30000" ReceiveTimeout="60000"/>
+	</http-conf:conduit>
+	<http-conf:conduit createdFromAPI="true" name="{http://F02_RetrieveInvoiceAccountCode/F02_RetrieveInvoiceAccountCodeSI}F02_RetrieveInvoiceAccountCodeSIExport1_F02_RetrieveInvoiceAccountCodeSIHttpPort.http-conduit">
+     	<http-conf:client AllowChunking="false" ConnectionTimeout="30000" ReceiveTimeout="60000"/>
+	</http-conf:conduit>
+	<http-conf:conduit createdFromAPI="true" name="{http://F03_RetrieveInvoiceCharges/F03_RetrieveInvoiceChargesSI}F03_RetrieveInvoiceChargesSIExport1_F03_RetrieveInvoiceChargesSIHttpPort.http-conduit">
+     	<http-conf:client AllowChunking="false" ConnectionTimeout="30000" ReceiveTimeout="60000"/>
+	</http-conf:conduit>
+	<http-conf:conduit createdFromAPI="true" name="{http://ESBLibs/INF/ESB/F4/Binding}F4_CreatePaymentSIExport1_F4_CreatePaymentSIHttpPort.http-conduit">
+     	<http-conf:client AllowChunking="false" ConnectionTimeout="30000" ReceiveTimeout="60000"/>
+	</http-conf:conduit>
+	<http-conf:conduit createdFromAPI="true" name="{http://F05_RetrieveServiceStatus/F05_RetrieveServiceStatusSI}F05_RetrieveServiceStatusSIExport1_F05_RetrieveServiceStatusSIHttpPort.http-conduit">
+     	<http-conf:client AllowChunking="false" ConnectionTimeout="30000" ReceiveTimeout="60000"/>
+	</http-conf:conduit>
+	<http-conf:conduit createdFromAPI="true" name="{http://F06_ReversePayment/F06_ReversePaymentSI}F06_ReversePaymentSIExport1_F06_ReversePaymentSIHttpPort.http-conduit">
+     	<http-conf:client AllowChunking="false" ConnectionTimeout="30000" ReceiveTimeout="60000"/>
+	</http-conf:conduit>
+	<http-conf:conduit createdFromAPI="true" name="{http://F08_WriteOffInquiryPOS/F08_WriteOffInquirySI}F08_WriteOffInquirySIExport1_F08_WriteOffInquirySIHttpPort.http-conduit">
+     	<http-conf:client AllowChunking="false" ConnectionTimeout="30000" ReceiveTimeout="60000"/>
+	</http-conf:conduit>
+	<http-conf:conduit createdFromAPI="true" name="{http://F09_WriteOffPaymentHistoryInquiryPOS/F09_RetrieveWriteOffPaymentHistorySI}F09_RetrieveWriteOffPaymentHistorySIExport1_F09_RetrieveWriteOffPaymentHistorySIHttpPort.http-conduit">
+     	<http-conf:client AllowChunking="false" ConnectionTimeout="30000" ReceiveTimeout="60000"/>
+	</http-conf:conduit>
+	<http-conf:conduit createdFromAPI="true" name="{http://F10_CreateWriteOffPOS/F10_CreateWriteOffSI}F10_CreateWriteOffSIExport1_F10_CreateWriteOffSIHttpPort.http-conduit">
+     	<http-conf:client AllowChunking="false" ConnectionTimeout="30000" ReceiveTimeout="60000"/>
+	</http-conf:conduit>
+	<http-conf:conduit createdFromAPI="true" name="{http://F11_ReverseWriteOffPOS/F11_ReverseWriteOffSI}F11_ReverseWriteOffSIExport1_F11_ReverseWriteOffSIHttpPort.http-conduit">
+     	<http-conf:client AllowChunking="false" ConnectionTimeout="30000" ReceiveTimeout="60000"/>
+	</http-conf:conduit>
+	<http-conf:conduit createdFromAPI="true" name="{http://F13_RetrievePaymentHistory/F13_RetrievePaymentHistorySI}F13_RetrievePaymentHistorySIExport1_F13_RetrievePaymentHistorySIHttpPort.http-conduit">
+     	<http-conf:client AllowChunking="false" ConnectionTimeout="30000" ReceiveTimeout="60000"/>
+	</http-conf:conduit>
+	<http-conf:conduit createdFromAPI="true" name="{http://ESBLibs/INF/ESB/F14/Binding}F14_RetrievePaymentSIExport1_F14_RetrievePaymentSIHttpPort.http-conduit">
+     	<http-conf:client AllowChunking="false" ConnectionTimeout="30000" ReceiveTimeout="60000"/>
+	</http-conf:conduit>
+	<http-conf:conduit createdFromAPI="true" name="{http://F18_CreateRefund/F18_CreateRefundSI}F18_CreateRefundSIExport1_F18_CreateRefundSIHttpPort.http-conduit">
+     	<http-conf:client AllowChunking="false" ConnectionTimeout="30000" ReceiveTimeout="60000"/>
+	</http-conf:conduit>
+	<http-conf:conduit createdFromAPI="true" name="{http://F19_RetrieveAccount/F19_RetrieveAccountSI}F19_RetrieveAccountSIExport1_F19_RetrieveAccountSIHttpPort.http-conduit">
+     	<http-conf:client AllowChunking="false" ConnectionTimeout="30000" ReceiveTimeout="60000"/>
+	</http-conf:conduit>
+	<http-conf:conduit createdFromAPI="true" name="{http://F20_RetrieveSubscrByInv/F20_RetrieveSubscrByInvSI}F20_RetrieveSubscrByInvSIExport1_F20_RetrieveSubscrByInvSIHttpPort.http-conduit">
+		<http-conf:client AllowChunking="false" ConnectionTimeout="30000" ReceiveTimeout="60000"/>
+	</http-conf:conduit>
+	<http-conf:conduit createdFromAPI="true" name="{http://M01_FindOrderSI}M01_FindOrderSIExport1_M01_FindOrderSIHttpPort.http-conduit">
+     	<http-conf:client AllowChunking="false" ConnectionTimeout="30000" ReceiveTimeout="60000"/>
+	</http-conf:conduit>
+	<http-conf:conduit createdFromAPI="true" name="{http://M02_FindOrderDetailSI}M02_FindOrderDetailSIExport1_M02_FindOrderDetailSIHttpPort.http-conduit">
+     	<http-conf:client AllowChunking="false" ConnectionTimeout="30000" ReceiveTimeout="60000"/>
+	</http-conf:conduit>
+	<http-conf:conduit createdFromAPI="true" name="{http://M03_CreateOrderPaymentSI}M03_CreateOrderPaymentSIExport1_M03_CreateOrderPaymentSIHttpPort.http-conduit">
+     	<http-conf:client AllowChunking="false" ConnectionTimeout="30000" ReceiveTimeout="60000"/>
+	</http-conf:conduit>
+	<http-conf:conduit createdFromAPI="true" name="{http://M04_ReverseReceiptSI}M04_ReverseReceiptSIExport1_M04_ReverseReceiptSIHttpPort.http-conduit">
+		<http-conf:client AllowChunking="false" ConnectionTimeout="30000" ReceiveTimeout="60000"/>
+	</http-conf:conduit>
+	<http-conf:conduit createdFromAPI="true" name="{http://M05_RepeatOrderSI}M05_RepeatOrderSIExport1_M05_RepeatOrderSIHttpPort.http-conduit">
+		<http-conf:client AllowChunking="false" ConnectionTimeout="30000" ReceiveTimeout="60000"/>
+	</http-conf:conduit>
+	
+	<http-conf:conduit createdFromAPI="true" name="{http://S001MGInqGiftvoucher}S001MGInqGiftvoucherPort.http-conduit">
+		<http-conf:client AllowChunking="false" ConnectionTimeout="30000" ReceiveTimeout="60000"/>
+	</http-conf:conduit>
+	<http-conf:conduit createdFromAPI="true" name="{http://S002MGUpdGiftvoucher}S002MGUpdGiftvoucherPort.http-conduit">
+		<http-conf:client AllowChunking="false" ConnectionTimeout="30000" ReceiveTimeout="60000"/>
+	</http-conf:conduit>
+	<http-conf:conduit createdFromAPI="true" name="{http://S004MGUpdFree}S004MGUpdFreePort.http-conduit">
+		<http-conf:client AllowChunking="false" ConnectionTimeout="30000" ReceiveTimeout="60000"/>
+	</http-conf:conduit>
+
+</beans>
