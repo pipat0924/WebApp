@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xmlns:cxf="http://cxf.apache.org/core"
+       xmlns:pl="http://cxf.apache.org/policy"
+       xsi:schemaLocation="
+          http://www.springframework.org/schema/beans 
+          http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+          http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+		  http://cxf.apache.org/policy http://cxf.apache.org/schemas/policy.xsd" >
+		  
+	<jaxws:client id="_f01webservice"
+		serviceClass="th.net.cat.epis.ws.f01_retrieveinvoiceheader.f01_retrieveinvoiceheadersi.F01RetrieveInvoiceHeaderSI"
+		address="${epis.endpoint.f01service}" >
+	</jaxws:client>
+	
+	<jaxws:client id="_f02webservice"
+		serviceClass="th.net.cat.epis.ws.f02_retrieveinvoiceaccountcode.f02_retrieveinvoiceaccountcodesi.F02RetrieveInvoiceAccountCodeSI"
+		address="${epis.endpoint.f02service}" >
+	</jaxws:client>
+	
+	<jaxws:client id="_f03webservice"
+		serviceClass="th.net.cat.epis.ws.f03_retrieveinvoicecharges.f03_retrieveinvoicechargessi.F03RetrieveInvoiceChargesSI"
+		address="${epis.endpoint.f03service}">
+	 </jaxws:client>
+	 
+	 <jaxws:client id="_f04webservice"
+	 	serviceClass="th.net.cat.epis.ws.esblibs.inf.esb.f4.F4CreatePaymentSI"
+	 	address="${epis.endpoint.f04service}">
+	 </jaxws:client>
+	
+	<jaxws:client id="_f05webservice"
+		serviceClass="th.net.cat.epis.ws.f05_retrieveservicestatus.f05_retrieveservicestatussi.F05RetrieveServiceStatusSI"
+		address="${epis.endpoint.f05service}">
+	</jaxws:client>
+	
+	<jaxws:client id="_f06webservice"
+		serviceClass="th.net.cat.epis.ws.f06_reversepayment.f06_reversepaymentsi.F06ReversePaymentSI"
+		address="${epis.endpoint.f06service}">
+	</jaxws:client>
+		
+	<jaxws:client id="_f08webservice"
+		serviceClass="th.net.cat.epis.ws.f08_writeoffinquirypos.f08_writeoffinquirysi.F08WriteOffInquirySI"
+		address="${epis.endpoint.f08service}">
+	</jaxws:client>
+	
+	<jaxws:client id="_f09webservice"
+		serviceClass="th.net.cat.epis.ws.f09_writeoffpaymenthistoryinquirypos.f09_retrievewriteoffpaymenthistorysi.F09RetrieveWriteOffPaymentHistorySI"
+		address="${epis.endpoint.f09service}">
+	</jaxws:client>
+	
+	<jaxws:client id="_f10webservice"
+		serviceClass="th.net.cat.epis.ws.f10_createwriteoffpos.f10_createwriteoffsi.F10CreateWriteOffSI"
+		address="${epis.endpoint.f10service}">
+	</jaxws:client>
+	
+	<jaxws:client id="_f11webservice"
+		serviceClass="th.net.cat.epis.ws.f11_reversewriteoffpos.f11_reversewriteoffsi.F11ReverseWriteOffSI"
+		address="${epis.endpoint.f11service}">
+	</jaxws:client>
+
+	<jaxws:client id="_f13webservice"
+		serviceClass="th.net.cat.epis.ws.f13_retrievepaymenthistory.f13_retrievepaymenthistorysi.F13RetrievePaymentHistorySI"
+		address="${epis.endpoint.f13service}">
+	</jaxws:client>
+	
+	<jaxws:client id="_f14webservice"
+		serviceClass="th.net.cat.epis.ws.esblibs.inf.esb.f14.F14RetrievePaymentSI"
+		address="${epis.endpoint.f14service}">
+	</jaxws:client>
+	
+	<jaxws:client id="_f14webservicelist"
+		serviceClass="th.net.cat.epis.ws.esblibs.inf.esb.f14.F14RetrievePaymentSI"
+		address="${epis.endpoint.f14listservice}">
+	</jaxws:client>
+	
+	<jaxws:client id="_f18webservice"
+		serviceClass="th.net.cat.epis.ws.f18_createrefund.f18_createrefundsi.F18CreateRefundSI"
+		address="${epis.endpoint.f18service}">
+	</jaxws:client>
+	
+	<jaxws:client id="_f19webservice"
+		serviceClass="th.net.cat.epis.ws.f19_retrieveaccount.f19_retrieveaccountsi.F19RetrieveAccountSI"
+		address="${epis.endpoint.f19service}">
+	</jaxws:client>
+
+	<jaxws:client id="_f20webservice"
+				  serviceClass="th.net.cat.epis.ws.f20_retrievesubscrbyinv.f20_retrievesubscrbyinvsi.F20RetrieveSubscrByInvSI"
+				  address="${epis.endpoint.f20service}">
+	</jaxws:client>
+
+	<jaxws:client id="_mnp01webservice"
+		serviceClass="th.net.cat.epis.ws.m01_findorder.m01_findordersi.M01FindOrderSI"
+		address="${epis.endpoint.mnp01service}">
+	</jaxws:client>
+	
+	<jaxws:client id="_mnp02webservice"
+		serviceClass="th.net.cat.epis.ws.m02_findorderdetail.m02_findorderdetailsi.M02FindOrderDetailSI"
+		address="${epis.endpoint.mnp02service}">
+	</jaxws:client>
+	
+	<jaxws:client id="_mnp03webservice"
+				  serviceClass="th.net.cat.epis.ws.m03_createreceipt.m03_createreceiptsi.M03CreateReceiptSI"
+				  address="${epis.endpoint.mnp03service}">
+	</jaxws:client>
+	<jaxws:client id="_mnp04webservice"
+				  serviceClass="th.net.cat.epis.ws.m04_reversereceipt.m04_reversereceiptsi.M04ReverseReceiptSI"
+				  address="${epis.endpoint.mnp04service}">
+	</jaxws:client>
+	<jaxws:client id="_mnp05webservice"
+				  serviceClass="th.net.cat.epis.ws.m05_repeatorder.m05_repeatordersi.M05RepeatOrderSI"
+				  address="${epis.endpoint.mnp05service}">
+	</jaxws:client>
+	
+	<jaxws:client id="_s001MGInqGiftvoucher"
+				  serviceClass="th.co.softpos.ws.mg.s001.S001MGInqGiftvoucher"
+				  address="${epis.endpoint.s001MGInqGiftvoucher}">
+	</jaxws:client>
+	<jaxws:client id="_s002MGUpdGiftvoucher"
+				  serviceClass="th.co.softpos.ws.mg.s002.S002MGUpdGiftvoucher"
+				  address="${epis.endpoint.s002MGUpdGiftvoucher}">
+	</jaxws:client>
+	<jaxws:client id="_s004MGUpdFree"
+				  serviceClass="th.co.softpos.ws.mg.s004.S004MGUpdFree"
+				  address="${epis.endpoint.s004MGUpdFree}">
+	</jaxws:client>
+
+	<bean id="abstractLoggingInterceptor" abstract="true">
+		<property name="prettyLogging" value="true"/>
+	</bean>
+	<bean id="loggingInInterceptor" class="org.apache.cxf.interceptor.LoggingInInterceptor" parent="abstractLoggingInterceptor"/>
+	<bean id="loggingOutInterceptor" class="org.apache.cxf.interceptor.LoggingOutInterceptor" parent="abstractLoggingInterceptor"/>
+
+	<cxf:bus>
+		<cxf:inInterceptors><ref bean="loggingInInterceptor"/></cxf:inInterceptors>
+		<cxf:outInterceptors><ref bean="loggingOutInterceptor"/></cxf:outInterceptors>
+		<cxf:outFaultInterceptors><ref bean="loggingOutInterceptor"/></cxf:outFaultInterceptors>
+		<cxf:inFaultInterceptors><ref bean="loggingInInterceptor"/></cxf:inFaultInterceptors>
+	</cxf:bus>
+
+</beans>
