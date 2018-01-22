@@ -2,8 +2,8 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="InvReceiveStockByStock_Landscape" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="b8b851f0-b7be-4587-93aa-a6e647ce813c">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="504"/>
-	<property name="ireport.y" value="313"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<style name="Cat_Bg_Title" isDefault="true" mode="Opaque" backcolor="#808080" fill="Solid" vAlign="Middle" fontName="FreesiaUPC" fontSize="16" isBold="true"/>
 	<style name="Cat_Bt_Title" isDefault="true" mode="Opaque" forecolor="#000000" fill="Solid" vAlign="Middle" fontName="FreesiaUPC" fontSize="16" isBold="true"/>
 	<style name="Cat_Wt_Title" isDefault="true" mode="Opaque" forecolor="#000000" backcolor="#FFFFFF" fill="Solid" vAlign="Middle" fontName="FreesiaUPC" fontSize="16" isBold="true"/>
@@ -214,7 +214,7 @@
 					<reportElement x="0" y="0" width="25" height="28" uuid="a52f3370-1b96-4458-ab0d-819ec3482610">
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					</reportElement>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
 						<paragraph lineSpacing="Proportional" lineSpacingSize="3.0"/>
 					</textElement>
 					<text><![CDATA[ลำดับที่]]></text>
@@ -333,15 +333,15 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$F{receiptDate}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="200" y="0" width="140" height="28" isPrintWhenDetailOverflows="true" uuid="7d16df7d-dc5f-4d9d-8583-3a6e4214e388"/>
 					<textElement textAlignment="Left">
 						<font isBold="false"/>
 						<paragraph lineSpacing="Proportional" lineSpacingSize="2.0" firstLineIndent="2" spacingBefore="1" spacingAfter="1"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{receiptName}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{receiptName} != null ?$F{receiptName}:"-"]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="340" y="0" width="70" height="28" isPrintWhenDetailOverflows="true" uuid="26b98470-2fe2-46d3-b763-5bcedaa5c084"/>
 					<textElement textAlignment="Center">
 						<font isBold="false"/>

@@ -3,7 +3,7 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="ireport.zoom" value="1.6105100000000008"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="196"/>
+	<property name="ireport.y" value="65"/>
 	<style name="Cat_Bg_Title" isDefault="true" mode="Opaque" backcolor="#808080" fill="Solid" vAlign="Middle" fontName="FreesiaUPC" fontSize="16" isBold="true"/>
 	<style name="Cat_Bt_Title" isDefault="true" mode="Opaque" forecolor="#000000" fill="Solid" vAlign="Middle" fontName="FreesiaUPC" fontSize="16" isBold="true"/>
 	<style name="Cat_Wt_Title" isDefault="true" mode="Opaque" forecolor="#000000" backcolor="#FFFFFF" fill="Solid" vAlign="Middle" fontName="FreesiaUPC" fontSize="16" isBold="true"/>
@@ -427,7 +427,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$F{receiptDate}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="209" y="0" width="92" height="28" isPrintWhenDetailOverflows="true" uuid="7d16df7d-dc5f-4d9d-8583-3a6e4214e388">
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -435,7 +435,7 @@
 					<textElement textAlignment="Left">
 						<paragraph lineSpacing="Proportional" lineSpacingSize="2.0" firstLineIndent="2" spacingBefore="1" spacingAfter="1"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{receiptName}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{receiptName}!= null ?$F{receiptName}:"-"]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="345" y="0" width="75" height="28" isPrintWhenDetailOverflows="true" uuid="26b98470-2fe2-46d3-b763-5bcedaa5c084"/>
@@ -496,7 +496,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="301" y="0" width="45" height="20" uuid="facecd0b-03ee-4f99-a2b6-0d02f77b7a47"/>
 					<textFieldExpression><![CDATA[$F{paymentUser}]]></textFieldExpression>
 				</textField>
