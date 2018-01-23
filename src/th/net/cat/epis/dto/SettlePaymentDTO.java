@@ -59,11 +59,20 @@ public class SettlePaymentDTO implements Serializable{
         private BigDecimal deduction;
         private BigDecimal wtAmt;
         private BigDecimal retentionAmt;
-        //private String billingGroup;
+        private String checkType;// chk นิติบุคคล
         private BigDecimal exchangeRate;
 
 
-        public String getCustNo() {
+        
+        public String getCheckType() {
+			return checkType;
+		}
+
+		public void setCheckType(String checkType) {
+			this.checkType = checkType;
+		}
+
+		public String getCustNo() {
             return custNo;
         }
 

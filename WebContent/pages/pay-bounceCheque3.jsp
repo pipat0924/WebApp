@@ -1718,6 +1718,7 @@
         view.table.deductionList.insert(["-", view.button.setTaxType.val(), value], true, { "type": index });
         updateDeduction();
         calculate();
+        $("#payCashAmountBath").val((parseFloat($("#payCashAmount").val())*parseFloat($("#payCashAmountRate").val())).toFixed(2));
     }
 
     function addPayTypeClickEvent() {
@@ -2463,7 +2464,13 @@
         view.table.penaltyTaxList.insert(["-", view.input.penaltyInvoiceNo.val(), view.radio.penaltyTaxType.label(), view.input.penaltyTaxAmount.val()], true);
         $('#penaltyTaxList td:nth-child(3)').hide();
     }
-
+    function addRetentionTaxNoClickEvent() {
+        view.table.retentionTaxList.insert(["-", view.input.retentionInvoiceNo.val(), view.input.retentionTaxAmount.val()], true);
+        $('#penaltyTaxList td:nth-child(3)').hide();
+    }
+    function addCompensationTaxNoClickEvent() {
+        view.table.compensationTaxList.insert(["-", view.input.compensationDepartmentCost.val(), view.input.compensationTaxAmount.val()], true);
+    }
     function calculateVatFromIncluded(ammount) {
             var rtVatBalance = 0;
             var sumVat = (100+vatRDGET);

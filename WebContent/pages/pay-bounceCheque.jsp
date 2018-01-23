@@ -853,8 +853,8 @@
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     success: function (res) {
-                        console.log("success :: success");
-                        console.log(res.detailARCustomerDTO.arName);
+//                         console.log("success :: success");
+//                         console.log(res.detailARCustomerDTO.arName);
 
                         advSearchChk = res;
                         view.table.advSrcDocHeaderResultList.rawData(res.payBounceChequeDTOList);
@@ -892,7 +892,7 @@
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     success: function (res) {
-
+//                     	setdataSearch(res);
                         advSearchChk = res;
                         view.table.advSrcSubDetailResultList.rawData(res.payBounceChequeDTOList);
                         view.dialog.advanceSearchMessageDialog.hideLoad();
@@ -923,7 +923,15 @@
                         var showList = [];
                         showList.push(advSearchChk.payBounceChequeDTOList[i]);
                         setCusDetail(advSearchChk.detailARCustomerDTO);
-                        view.table.invoiceList.rawData(showList);
+                        var invoiceData =[];
+                        if (showList.length > 0) {
+                            invoiceData = $.map(showList, invoiceListMapper);
+                            console.log(invoiceData);
+                        }
+                        
+                        
+//                         view.table.invoiceList.rawData(showList);
+                        view.table.invoiceList.rawData(invoiceData);
                         view.table.historyList.rawData(advSearchChk.historyARDTOList);
 
                         // var payBounceChequeDTOLists = [];
@@ -934,11 +942,25 @@
 
                         selectZap();
                         view.dialog.customerSearch.hide();
-
+                        
+                        $.ajax({url: "../exchangeRateList.json", type: "GET", data: {}, async: false,
+                            success: function (res) {
+                                dataM = res.data;
+                            }, error: function () { console.log("error"); }
+                        });
+                        for(var i=0; i<dataM.length; i++){
+                            if(dataM[i].message==advSearchChk.payBounceChequeDTOList[0].currency){dateRateRD = dataM[i].updateDttm; dateRateRD = dateRateRD.substring(8,10)+"/"+dateRateRD.substring(5,7)+"/"+dateRateRD.substring(0,4); rateChangeRD = dataM[i].rateUnit;}
+                        }
                         $('.cusPanel').show();
                         $('.navPanel').show();
                         view.dialog.mainMessageDialog.clear();
                         view.dialog.mainMessageDialogSummary.clear();
+                        rateChangeRDGet = rateChangeRD;
+                      		 view.dialog.mainMessageDialogSummary.clear().warn(["อัตราการแลกเปลี่ยน ณ วันที่ : "+dateRateRD +" = "+rateChangeRD]).show();
+	                        $("#customerARPanel").show();
+	                        $("#bouncePanel").show();
+	                        $("#summaryPanel").show();
+	                        $("#navigatePanel").show();
                     }
                 }
                 console.log(docHead + " " + docHead + " " + docHead + " = docHead");
@@ -1063,7 +1085,56 @@
             }
 
         }
+		function setdataSearch(res){
+			if(res.detailARCustomerDTO!=null && res.payBounceChequeDTOList.length >0){
+                payBounceChequeDTOList = res.payBounceChequeDTOList;
+                vatRDGet = res.vatRD;
+                setCusDetail(res.detailARCustomerDTO);
+                var invoiceData = [];
+                var historyData = [];
+                if (res.payBounceChequeDTOList.length > 0) {
+					invoiceData = res.data;
+                    invoiceData = $.map(res.payBounceChequeDTOList, invoiceListMapper);
+                    console.log(invoiceData);
+                }
+                if (res.historyARDTOList.length > 0) {
+                	historyData = res.data;
+                	historyData = $.map(res.historyARDTOList, historyListMapper);
+                    console.log(historyData);
+                }
 
+				view.table.invoiceList.rawData(invoiceData);
+                view.table.historyList.rawData(historyData);
+
+                for(var i=0; i<dataM.length; i++){
+                    if(dataM[i].message==res.payBounceChequeDTOList[0].currency){dateRateRD = dataM[i].updateDttm; dateRateRD = dateRateRD.substring(8,10)+"/"+dateRateRD.substring(5,7)+"/"+dateRateRD.substring(0,4); rateChangeRD = dataM[i].rateUnit;}
+                }
+                selectZap();
+                var summaryList = (view.session("bounceCheque") || []).length;
+                view.button.summaryPayment.disable(summaryList == 0).badge(summaryList);
+                view.button.submitPayment.disable(summaryList == 0);
+                $('.cusPanel').show();
+                $('.navPanel').show();
+                rateChangeRDGet = rateChangeRD;
+                view.dialog.mainMessageDialogSummary.clear().warn(["อัตราการแลกเปลี่ยน ณ วันที่ : "+dateRateRD +" = "+rateChangeRD]).show();
+                    $("#customerARPanel").show();
+                    $("#bouncePanel").show();
+                    $("#summaryPanel").show();
+                    $("#navigatePanel").show();
+                }else {
+                	 $('.cusPanel').hide();
+                     $('.navPanel').hide();
+                     $("#customerARPanel").hide();
+                     $("#bouncePanel").hide();
+                     $("#summaryPanel").hide();
+                     $("#navigatePanel").hide();
+                	view.dialog.mainMessageDialog.clear().error(["ไม่พบข้อมูล"]).show();
+                }
+                view.dialog.mainMessageDialog.stopLoad();
+		}
+        
+        
+        
         function setCusDetail(detailARCustomerDTO) {
             $('#arAccountCode').val(detailARCustomerDTO.arAccountCode);
             $('#arName').val(detailARCustomerDTO.arName);
@@ -1177,6 +1248,10 @@
         }
 
         function calculateVatFromIncluded(ammount) {
+        	
+        if(vatRDGet == null && typeof(myVariable) == "undefined"){
+        	vatRDGet =parseFloat("7");
+        }
             var rtVatBalance = 0;
             var sunVat = (100+vatRDGet);
             rtVatBalance = (ammount * 100) / sunVat;

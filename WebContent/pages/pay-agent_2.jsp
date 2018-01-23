@@ -794,6 +794,7 @@
             params["customers["+ custIndex +"].agentTaxNo"] = customer.agentTaxNo;
             params["customers["+ custIndex +"].feesIncome"] = customer.feesIncome;
             params["customers["+ custIndex +"].ref1"] = customer.ref1;
+            params["customers["+ custIndex +"].checkType"] = customer.checkType;
             for (var serviceIndex = 0, n = customer.serviceList.length; serviceIndex < n; serviceIndex++) {
                 var service = customer.serviceList[serviceIndex];
                 console.log(service);

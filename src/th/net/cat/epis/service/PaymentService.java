@@ -1480,7 +1480,19 @@ public class PaymentService {
                     "Please specify the customer type is INDIVIDUAL or ORGANIZATION or STATEAGENCY");
         }
     }
-
+    String getReceiptType3(String name,String taxId ,String address ,String branch, String type,String chkType ) { //by got new Agent Edit  //default chkType Y นิติบุคคล
+    	String result = RECEIPT_TYPE_ABBREVIATION;
+    	if(chkType.equalsIgnoreCase("Y")) {
+    		if(!name.isEmpty() && !name.equals("") && !address.isEmpty() && !"".equals(address) && !branch.isEmpty() && !"".equals(branch) && !taxId.isEmpty() && !"".equals(taxId)) {
+    			result =  RECEIPT_TYPE_FULL;
+    		}
+    	}else {
+    		if(!name.isEmpty() && !name.equals("") && !address.isEmpty() && !"".equals(address)) {
+    			result =  RECEIPT_TYPE_FULL;
+    		}
+    	}
+    	return result;
+    }
     // by NSD 02-03-2017
     String getReceiptType2(Customer customer) {
         if (customer == null) {
@@ -2867,7 +2879,8 @@ public class PaymentService {
             }
             rcpChange = rcpReceived.subtract(rcpTotalCharge);
             receipt.setPayment(payment);
-            receipt.setType(getReceiptType(customer));
+//            receipt.setType(getReceiptType(customer)); by 23/01/2018
+            receipt.setType(getReceiptType3(customer.getName(),customer.getTax(),customer.getReceiptAddr(),customer.getBranch(),customer.getType(),cust.getCheckType()));
             receipt.setNo(getReceiptNo(posNo,
                     RECEIPT_TYPE_FULL.equals(receipt.getType()) ? RECEIPT_NO_FLAG_WITH_TAX_INVOICE
                             : RECEIPT_NO_FLAG_WITHOUT_TAX_INVOICE,

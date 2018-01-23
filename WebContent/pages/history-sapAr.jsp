@@ -97,10 +97,6 @@
 													<div class="col-sm-2"><input id="regionKey1" class="form-control" disabled></div>
 													<label class="control-label col-sm-2">สาขาลูกหนี้ :</label>
 													<div class="col-sm-2"><input id="branchAR" class="form-control"></div>
-													<!-- <label class="control-label col-sm-2" type="hidden">กลุ่มผู้ใช้บริการ :</label>
-													<div class="col-sm-2" type="hidden">
-														<select class="form-control" id="inputCustomerSegment" disabled></select>
-													</div> -->
 												</div>
 											</div>
 										</div>
@@ -912,6 +908,10 @@
 		view.table.advSrcBillNoResultList.hideLoad().clear();
 		view.table.advSrcSvcNoResultList.hideLoad().clear();
 		view.table.advSrcCusNoResultList.hideLoad().clear();
+		$("#avdDocHead").val("");
+        var clearDT = [];
+//         view.table.advSrcDocHeaderResultList.rawData(clearDT);
+		view.dialog.customerSearch.show();
 	}
 
     function searchClickEvent() {

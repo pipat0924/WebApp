@@ -1,7 +1,9 @@
 package th.net.cat.epis.service;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,11 +12,14 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import th.net.cat.epis.controller.EpContextHolder;
 import th.net.cat.epis.dto.ReportPayment;
+import th.net.cat.epis.dto.bouncecheque.SapDebtDTO;
 import th.net.cat.epis.entity.ReceiptPrinttypeMapping;
 import th.net.cat.epis.entity.ReceiptPrinttypeMappingPK;
 import th.net.cat.epis.entity.Trsreprint;
@@ -105,6 +110,7 @@ public class EpisService {
 		}
 		
 	}
+
 	@Transactional
 	public void setReceiptFormat(Long receiptid ,String receiptFormat) {
 		Integer count= episJdbcTemplate.queryForObject("SELECT "
@@ -166,5 +172,28 @@ public class EpisService {
 				+ " WHERE RECEIPT_ID = ? ", new Object[]{receiptId}, String.class);
 		return receiptName;
 	}
-
+	@Transactional
+	public void testByUpdateSap(List<SapDebtDTO> sapListfor) {
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("UPDATE SAP_DEBT SET ");
+		sql.append("LOCAL_TOTAL_PAID = ? ");
+		sql.append(",LOCAL_VAT_PAID =? ");
+		sql.append(",TRANS_TOTAL_PAID = ? ");
+		sql.append(",TRANS_VAT_PAID =? ");
+		sql.append(",LOCAL_BALANCE_DUE = ? ");
+		sql.append(",TRANS_BALANCE_DUE =? ");
+		sql.append(", UPDATED_DTM = ?");
+		sql.append(", UPDATED_USER = ?");
+		sql.append("WHERE ACCOUNT_NO =? ");
+		sql.append("AND DOC_HEADER_TEXT_INV =? ");
+		Date date = new Date();
+		Timestamp timestamp = new Timestamp(date.getTime());
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		for (SapDebtDTO beanSap : sapListfor) {
+			episJdbcTemplate.update(sql.toString(),beanSap.getLocalTotalPaid(), beanSap.getLocalVatPaid(),beanSap.getTransTotalPaid(),beanSap.getTransVatPaid(),
+			              beanSap.getLocalBalanceDue(),beanSap.getTransBalanceDue(),timestamp,userName,beanSap.getAccountNo() ,beanSap.getDocHeaderTextInv().toString());
+		}
+		
+	}
 }

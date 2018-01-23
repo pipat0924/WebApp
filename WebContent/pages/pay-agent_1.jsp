@@ -133,7 +133,7 @@
                                                     <div class="col-sm-3"></div>
                                                     <label class="control-label col-sm-2">นิติบุคคล :</label>
                                                     <div class="col-sm-3">
-														<input type="checkbox" name="" value="">
+														<input type="checkbox" name="" value="" id="chkType">
                                                     </div>
                                                 </div>
 
@@ -199,6 +199,7 @@
 </html>
 <script type="text/javascript">
 	var agentData2 = "";
+	var flagAgentReload="N";
     var view = (function($){
         var self = this, defaultErrorMessage = "An error occurred but there is no message response.";
         self.session = function(key, val) { if (!val) { var val = window.sessionStorage.getItem(key); return val && (val.indexOf("{") > -1 || val.indexOf("[") > -1) ? JSON.parse(val) : val } window.sessionStorage.setItem(key, ($.type(val) != "object" && $.type(val) != "array" ? val : JSON.stringify(val)))	};
@@ -407,9 +408,11 @@
     })(jQuery);
     loadAgent();
     function loadAgent(){
+    	agentData2 = "";
         var queryString = self.utils.queryString();
         $.get("../loadMenuListPaymentAgent.json", function (res) {
-            var agents = res.data;
+            var agents = [];
+            	agents = res.data;
             console.log("agent >>>>>>>>>>>>>>>>> ")
             console.log(agents)
             window.session("agentDatas", agents);
@@ -421,6 +424,7 @@
                     break;
                 }
             }
+            flagAgentReload ="Y"
         })
     }
 
@@ -431,9 +435,9 @@
          $("#inputProdBarcode1").click( function () {
             buttonSearchBillNoClickEvent();
         })
-        $("#inputProdBarcode1").mousedown( function () {
-            buttonSearchBillNoClickEvent();
-        })
+//         $("#inputProdBarcode1").mousedown( function () {
+//             buttonSearchBillNoClickEvent();
+//         })
     })
 
     function setup() {
@@ -472,6 +476,9 @@
         })
     }
     function buttonSearchBillNoClickEvent() {
+    	if(flagAgentReload == "N"){
+    		loadAgent();
+    	}
         if(view.inputProdBarcode1.val().trim() == '') return;
         var panelActived = "0";
         var billBars = view.inputProdBarcode1.val();
@@ -567,6 +574,7 @@
         	$("#inputAgentType").val("ไม่พบข้อมูลตัวแทนรับชำระ");
 			$("#panelReceiptDetails").hide();
         }
+        flagAgentReload ="N";
     }
     function buttonAddBillingListClickEvent() {
         view.panelSummaryInfo.show(1);
@@ -583,7 +591,8 @@
                 "serviceMoreData": 1,
                 "serviceAmount": view.inputServiceAmount.val(),
                 "serviceVatAmount": serviceVatAmount,
-                "feeFlg": null
+                "feeFlg": null,
+                "checkType:":checkTypeView()
             });
         view.buttonProcessPayment.enable();
         calculate();
@@ -618,6 +627,18 @@
         var params = "id="+agentData.id;
         location.href = "pay-agent_1.jsp?"+params;
     }
+    function checkTypeView(){
+    	var type ="N";
+    	if($("#chkType").is(':checked')){
+    		type ="Y"
+    		console.log("chkType true") // checked
+    	}else{
+    		type ="N"
+    		console.log("chkType false");
+    	}
+    		     
+    	return type;
+    }
     function buildBillingList() {
         var billingList = view.session("billingList");
         var agentData = view.session("agentData");
@@ -646,7 +667,8 @@
                 "serviceList" : serviceList,
                 "agentTaxNo" : agentData.taxId,
                 "feesIncome": view.inputServiceFee.val(),
-                "ref1": agentData.code
+                "ref1": agentData.code,
+                "checkType":checkTypeView()
             });
 
         if(view.inputFee.val() > 0){
@@ -679,7 +701,8 @@
                     "serviceList" : feeServiceList,
                     "agentTaxNo" : agentData.taxId,
                     "feesIncome": "",
-                    "ref1": agentData.code
+                    "ref1": agentData.code,
+                    "checkType":checkTypeView()
                 });
         }
         view.session("billingList", billingList);

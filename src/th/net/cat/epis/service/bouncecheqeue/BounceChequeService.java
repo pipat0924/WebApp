@@ -26,6 +26,7 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
@@ -34,6 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import net.sf.jasperreports.crosstabs.fill.calculation.ArbitraryRankComparator;
 import th.net.cat.crm.entity.CustomerService;
+import th.net.cat.epis.batch.task.EndDayClosingTask;
 import th.net.cat.epis.controller.otboss.OTTBossController;
 import th.net.cat.epis.dao.sap.SapDebtDao;
 import th.net.cat.epis.dto.CreatePaymentResultDTO;
@@ -54,6 +56,7 @@ import th.net.cat.epis.entity.CreditLimitTransEntity;
 import th.net.cat.epis.entity.Invoice;
 import th.net.cat.epis.entity.PaymentSummary;
 import th.net.cat.epis.entity.Receipt;
+import th.net.cat.epis.entity.SapDebtEntity;
 import th.net.cat.epis.entity.Service;
 import th.net.cat.epis.entity.Session;
 import th.net.cat.epis.entity.Transaction;
@@ -62,6 +65,8 @@ import th.net.cat.epis.repo.InvoiceRepository;
 import th.net.cat.epis.repo.MasterDataRepository;
 import th.net.cat.epis.repo.PayBounceChequeRepository;
 import th.net.cat.epis.repo.PaymentRepository;
+import th.net.cat.epis.repo.SapDebtRepository;
+import th.net.cat.epis.service.EpisService;
 import th.net.cat.epis.service.PaymentService;
 import th.net.cat.epis.service.UserService;
 import th.net.cat.epis.service.otboss.OTBOssService;
@@ -90,7 +95,10 @@ public class BounceChequeService {
 	PaymentService paymentService;
 	@Autowired
 	private MasterDataRepository masterDataRepository;
-
+	@Autowired
+	EpisService episService;
+	@Autowired
+	SapDebtRepository sapDebtre;
 	@Resource(name = "episJdbcTemplate")
 	JdbcTemplate episJdbcTemplate;
 	
@@ -527,232 +535,228 @@ public class BounceChequeService {
 	}
 
 	public BounceChequeDTO avdSearchPayBounceCheque(String docHead) {
-		List<BounceCheque> bounceChequeList = new ArrayList<BounceCheque>();
+//		List<BounceCheque> bounceChequeList = new ArrayList<BounceCheque>();
+		BigDecimal vatRate = new BigDecimal(masterDataRepository.findByKey(AppConstants.VAT_RATE).get(0).getValue());
 		List<PayBounceChequeDTO> list = new ArrayList<PayBounceChequeDTO>();
+		List<SapDebtEntity> listsap = new ArrayList<SapDebtEntity>();
 		detailARCustomerDTO = new DetailARCustomerDTO();
 		bounceChequeDTO = new BounceChequeDTO();
 		historyARDTO = new HistoryARDTO();
-		HistoryARDTO historyARDTO2 = new HistoryARDTO();
-		List<HistoryARDTO> list2 = new ArrayList<HistoryARDTO>();
-		bounceChequeList = payBounceChequeRepository.searchPaySAP(null, docHead);
+		List<HistoryARDTO> listHistory = new ArrayList<HistoryARDTO>();
+		List<SapCorreceiptDTO> listSapCor = new ArrayList<SapCorreceiptDTO>();
+//		bounceChequeList = payBounceChequeRepository.searchPaySAP(null, docHead);
+		listsap =	sapDebtre.searchSapDebt(docHead);
+		if(listsap.size() > 0) {
+			listSapCor = getDataAccountCorreCeipt(listsap.get(0).getAccountNo());
+			System.out.println("==sapDebt=="+listsap.size());
+			detailARCustomerDTO.setAddress(listsap.get(0).getCustomerHomeStreet() == null ? "" : listsap.get(0).getCustomerHomeStreet());
+			detailARCustomerDTO.setArAccountCode(listsap.get(0).getAccountNo() == null ? "": listsap.get(0).getAccountNo());
+			detailARCustomerDTO.setArGroup(listsap.get(0).getCustomerGroupCode() == null ? "" : listsap.get(0).getCustomerGroupCode());
+			detailARCustomerDTO.setArName(listsap.get(0).getCustomerName() == null ? "" : listsap.get(0).getCustomerName());
+			detailARCustomerDTO.setBranchAR(listsap.get(0).getCustomerBranchCode() == null ? "" : listsap.get(0).getCustomerBranchCode());
+			detailARCustomerDTO.setGlAccount(listsap.get(0).getGlAccount() == null ? "" : listsap.get(0).getGlAccount());
+			detailARCustomerDTO.setRegionKey1(listsap.get(0).getRef1SapRegionCode() == null ? "" : listsap.get(0).getRef1SapRegionCode());
+			detailARCustomerDTO.setTaxId(listsap.get(0).getTaxCode() == null ? "" : listsap.get(0).getTaxCode());
+			for (SapDebtEntity sabEm : listsap) {
+				payBounceChequeDTO = new PayBounceChequeDTO();
 
-		detailARCustomerDTO
-				.setAddress(bounceChequeList.get(0).getAddress() == null ? "" : bounceChequeList.get(0).getAddress());
-		detailARCustomerDTO.setArAccountCode(
-				bounceChequeList.get(0).getArAccountCode() == null ? "" : bounceChequeList.get(0).getArAccountCode());
-		detailARCustomerDTO
-				.setArGroup(bounceChequeList.get(0).getArGroup() == null ? "" : bounceChequeList.get(0).getArGroup());
-		detailARCustomerDTO
-				.setArName(bounceChequeList.get(0).getArName() == null ? "" : bounceChequeList.get(0).getArName());
-		detailARCustomerDTO.setBranchAR(
-				bounceChequeList.get(0).getBranchAR() == null ? "" : bounceChequeList.get(0).getBranchAR());
-		detailARCustomerDTO.setGlAccount(
-				bounceChequeList.get(0).getGlAccount() == null ? "" : bounceChequeList.get(0).getGlAccount());
-		detailARCustomerDTO.setRegionKey1(
-				bounceChequeList.get(0).getRegionKey1() == null ? "" : bounceChequeList.get(0).getRegionKey1());
-		detailARCustomerDTO
-				.setTaxId(bounceChequeList.get(0).getTaxId() == null ? "" : bounceChequeList.get(0).getTaxId());
+				if (sabEm.getLocalBalanceDue()!=new BigDecimal(0)) {
+					payBounceChequeDTO.setRefDate(sabEm.getRefSapPeriod());
+					payBounceChequeDTO.setDocHead(sabEm.getDocHeaderTextInv());
+					payBounceChequeDTO.setServiceKey3(sabEm.getRef3ServiceName());
+					payBounceChequeDTO.setCurrency(sabEm.getCurrencyCodeAr());
+					payBounceChequeDTO.setAmountARin(sabEm.getLocalBalanceDue().doubleValue());
+					payBounceChequeDTO.setRateChange(sabEm.getExchRateAr().doubleValue());
+					payBounceChequeDTO.setAmountARout(sabEm.getTransBalanceDue().doubleValue());
+					payBounceChequeDTO.setCurrencyChangeDate(sabEm.getExchRateDateAr()); // formatDatePass
+					payBounceChequeDTO.setDocNo(sabEm.getSapdocNo());
+					payBounceChequeDTO.setAccountYear(Integer.valueOf(sabEm.getFiscalYear()));
+					payBounceChequeDTO.setDocDate(sabEm.getDocDateAr()); // formatDatePass
+					payBounceChequeDTO.setPassDate(DateUtil.getDisplay(sabEm.getPostingDateAr(), DateUtil.STANDARD_DATE_PATTERN, DateUtil.ENG_LOCALE));
+					payBounceChequeDTO.setVatCode(sabEm.getTaxCode());
+					payBounceChequeDTO.setMessage(sabEm.getAwText());
+					payBounceChequeDTO.setArAccountCode(sabEm.getAccountNo());
+					payBounceChequeDTO.setArName(sabEm.getCustomerName());
+					payBounceChequeDTO.setGlAccount(sabEm.getGlAccount());
+					payBounceChequeDTO.setTaxId(sabEm.getTaxCode());
+					payBounceChequeDTO.setArGroup(sabEm.getCustomerGroupCode());
+					payBounceChequeDTO.setRegionKey1(sabEm.getRef1SapRegionCode());
+					payBounceChequeDTO.setBranchAR(sabEm.getCustomerBranchCode());
+					payBounceChequeDTO.setAddress(sabEm.getCustomerHomeStreet());
+					payBounceChequeDTO.setRecordStatus(sabEm.getRecordStatus());
+					payBounceChequeDTO.setAmountPay(sabEm.getTransBalanceDue());
+					payBounceChequeDTO.setAmountTotalPay(sabEm.getTransBalanceDue());
+					payBounceChequeDTO.setCurrencyCode(sabEm.getCustomerCountryKey());
+					list.add(payBounceChequeDTO);
+				}
 
-		for (int i = 0; i < bounceChequeList.size(); i++) {
-			payBounceChequeDTO = new PayBounceChequeDTO();
-
-			payBounceChequeDTO.setRefDate(formatDateDoc(bounceChequeList.get(i).getRefDate()));
-			payBounceChequeDTO.setDocHead(bounceChequeList.get(i).getDocHead());
-			payBounceChequeDTO.setServiceKey3(bounceChequeList.get(i).getServiceKey3());
-			payBounceChequeDTO.setCurrency(bounceChequeList.get(i).getCurrency());
-			payBounceChequeDTO.setAmountARin(bounceChequeList.get(i).getAmountARin());
-			payBounceChequeDTO.setRateChange(bounceChequeList.get(i).getRateChange());
-			payBounceChequeDTO.setAmountARout(bounceChequeList.get(i).getAmountARout());
-			payBounceChequeDTO.setCurrencyChangeDate((bounceChequeList.get(i).getCurrencyChangeDate())); // formatDatePass
-			payBounceChequeDTO.setDocNo(bounceChequeList.get(i).getDocNo());
-			payBounceChequeDTO.setAccountYear(bounceChequeList.get(i).getAccountYear());
-			payBounceChequeDTO.setDocDate(bounceChequeList.get(i).getDocDate()); // formatDatePass
-			payBounceChequeDTO.setPassDate(formatDatePass(bounceChequeList.get(i).getPassDate()));
-			payBounceChequeDTO.setVatCode(bounceChequeList.get(i).getVatCode());
-			payBounceChequeDTO.setMessage(bounceChequeList.get(i).getMessage());
-			payBounceChequeDTO.setArAccountCode(bounceChequeList.get(i).getArAccountCode());
-			payBounceChequeDTO.setArName(bounceChequeList.get(i).getArName());
-			payBounceChequeDTO.setGlAccount(bounceChequeList.get(i).getGlAccount());
-			payBounceChequeDTO.setTaxId(bounceChequeList.get(i).getTaxId());
-			payBounceChequeDTO.setArGroup(bounceChequeList.get(i).getArGroup());
-			payBounceChequeDTO.setRegionKey1(bounceChequeList.get(i).getRegionKey1());
-			payBounceChequeDTO.setBranchAR(bounceChequeList.get(i).getBranchAR());
-			payBounceChequeDTO.setAddress(bounceChequeList.get(i).getAddress());
-			payBounceChequeDTO.setRecordStatus(bounceChequeList.get(i).getRecordStatus());
-
-			list.add(payBounceChequeDTO);
+			}
+			if(listSapCor.size() >0) {
+				for(SapCorreceiptDTO corBean :listSapCor) {
+					HistoryARDTO historyARDTO = new HistoryARDTO();
+//					double currenIn = 0;
+//					if(corBean.getTotalcharge()!=0 && corBean.getExchangeRate() !=0) {
+//						currenIn = corBean.getReceived().doubleValue() *corBean.getExchangeRate();
+//					}
+//					
+					historyARDTO.setAccountYeah(corBean.getYearAcc());
+					historyARDTO.setAmountCurrency(corBean.getReceived().doubleValue());
+					historyARDTO.setAmountCurrencyin(corBean.getReceived().doubleValue() *corBean.getExchangeRate());
+					historyARDTO.setArNo(corBean.getInvoiceno());
+					historyARDTO.setBranch(corBean.getBranchname());
+					historyARDTO.setChangeDate(corBean.getUpdatedttm());
+					historyARDTO.setCurrency(corBean.getCurrencyCodeAr());
+					historyARDTO.setDocNo(corBean.getDocnoSap());
+					historyARDTO.setLogPay(corBean.getPaymentcase());
+					historyARDTO.setMassage(corBean.getMessage());
+					historyARDTO.setPayAmountAR(corBean.getDebtamount());
+//					String datepay = DateUtil.convertToString(corBean.getUpdatedttm(), DateUtil.STANDARD_DATE_PATTERN, DateUtil.ENG_LOCALE);
+//					historyARDTO.setPayDate();
+					historyARDTO.setPayType(corBean.getReceipttype());
+					historyARDTO.setRateChange(corBean.getExchangeRate());
+//					String dateRec = DateUtil.convertToString(corBean.getReceiptdttm(), DateUtil.STANDARD_DATE_PATTERN, DateUtil.ENG_LOCALE);
+//					historyARDTO.setReceiptDate(corBean.getReceiptdttm());
+					String dateIn = DateUtil.getDisplay(corBean.getReceiptdttm(), DateUtil.STANDARD_DATE_PATTERN, DateUtil.ENG_LOCALE);
+					String dataEx = DateUtil.getDisplay(corBean.getUpdatedttm(), DateUtil.STANDARD_DATE_PATTERN, DateUtil.ENG_LOCALE);
+					historyARDTO.setDateInvoice(dateIn.toString());
+					historyARDTO.setDateExrate(dataEx.toString());
+					historyARDTO.setDatecCreate(dataEx.toString());
+					historyARDTO.setReceiptNo(corBean.getReceiptno());
+					historyARDTO.setRefDate(corBean.getBillcycle());
+					historyARDTO.setServiceKey3(corBean.getRef3ServiceName());
+					historyARDTO.setStatus(corBean.getAttributes().indexOf("R") > -1 ? "ยกเลิก"
+							: (corBean.getAttributes().indexOf("C") > -1 ? "ปกติ" : "หนี้สูญรับคืน"));
+					historyARDTO.setUser(corBean.getUpdateuser());
+					historyARDTO.setVat(corBean.getVattm());
+					historyARDTO.setRemark(corBean.getRemark());
+					historyARDTO.setVatIn(corBean.getVattm()*corBean.getExchangeRate());
+					listHistory.add(historyARDTO);
+					
+				}
+			}
+	
+//			bounceChequeDTO.setDetailARCustomerDTO(detailARCustomerDTO);
+//			bounceChequeDTO.setPayBounceChequeDTOList(list);
+//			bounceChequeDTO.setHistoryARDTOList(list2);
+			bounceChequeDTO.setDetailARCustomerDTO(detailARCustomerDTO);
+			bounceChequeDTO.setPayBounceChequeDTOList(list);
+			bounceChequeDTO.setHistoryARDTOList(listHistory);
+			bounceChequeDTO.setVatRD(vatRate);
+			
 		}
-
-		Date date = new Date();
-		historyARDTO.setAccountYeah("1234");
-		historyARDTO.setAmountCurrency(200.00);
-		historyARDTO.setAmountCurrencyin(100.00);
-		historyARDTO.setArNo("เลขที่ใบแจ้งหนี้");
-		historyARDTO.setBranch("สาขาลูกหนี้");
-		historyARDTO.setChangeDate(date);
-		historyARDTO.setCurrency("USD");
-		historyARDTO.setDocNo("เลขที่เอกสาร");
-		historyARDTO.setLogPay("วิธีการชำระ");
-		historyARDTO.setMassage("Msss");
-		historyARDTO.setPayAmountAR(500.00);
-		historyARDTO.setPayDate(date);
-		historyARDTO.setPayType("ประเภทการชำระ");
-		historyARDTO.setRateChange(32.22);
-		historyARDTO.setReceiptDate(date);
-		historyARDTO.setReceiptNo("เลขที่ใบเสณ้จ");
-		historyARDTO.setRefDate("รอบการใช้งาน");
-		historyARDTO.setServiceKey3("Service");
-		historyARDTO.setStatus("Status");
-		historyARDTO.setUser("ผู้รับชำระ");
-		historyARDTO.setVat(20.00);
-		historyARDTO.setRemark("remark");
-		historyARDTO.setVatIn(10.00);
-
-		historyARDTO2.setAccountYeah("1234");
-		historyARDTO2.setAmountCurrency(200.00);
-		historyARDTO2.setAmountCurrencyin(100.00);
-		historyARDTO2.setArNo("เลขที่ใบแจ้งหนี้");
-		historyARDTO2.setBranch("สาขาลูกหนี้");
-		historyARDTO2.setChangeDate(date);
-		historyARDTO2.setCurrency("USD");
-		historyARDTO2.setDocNo("เลขที่เอกสาร");
-		historyARDTO2.setLogPay("วิธีการชำระ");
-		historyARDTO2.setMassage("Msss");
-		historyARDTO2.setPayAmountAR(500.00);
-		historyARDTO2.setPayDate(date);
-		historyARDTO2.setPayType("ประเภทการชำระ");
-		historyARDTO2.setRateChange(32.22);
-		historyARDTO2.setReceiptDate(date);
-		historyARDTO2.setReceiptNo("เลขที่ใบเสณ้จ");
-		historyARDTO2.setRefDate("รอบการใช้งาน");
-		historyARDTO2.setServiceKey3("Service");
-		historyARDTO2.setStatus("Status");
-		historyARDTO2.setUser("ผู้รับชำระ");
-		historyARDTO2.setVat(20.00);
-		historyARDTO2.setRemark("remark");
-		historyARDTO2.setVatIn(10.00);
-		list2.add(historyARDTO2);
-		list2.add(historyARDTO);
-
-		bounceChequeDTO.setDetailARCustomerDTO(detailARCustomerDTO);
-		bounceChequeDTO.setPayBounceChequeDTOList(list);
-		bounceChequeDTO.setHistoryARDTOList(list2);
-
 		return bounceChequeDTO;
 	}
 
 	public BounceChequeDTO searchPayAdvTab(String accountNo, String cusName, String avdRegionKey1) {
-		bounceChequeDTO = new BounceChequeDTO();
+		BigDecimal vatRate = new BigDecimal(masterDataRepository.findByKey(AppConstants.VAT_RATE).get(0).getValue());
 		List<PayBounceChequeDTO> list = new ArrayList<PayBounceChequeDTO>();
+		List<SapDebtEntity> listsap = new ArrayList<SapDebtEntity>();
+		Pageable p = null;
 		detailARCustomerDTO = new DetailARCustomerDTO();
-		List<BounceCheque> bounceChequeList = new ArrayList<BounceCheque>();
+		bounceChequeDTO = new BounceChequeDTO();
 		historyARDTO = new HistoryARDTO();
-		HistoryARDTO historyARDTO2 = new HistoryARDTO();
-		List<HistoryARDTO> list2 = new ArrayList<HistoryARDTO>();
-		bounceChequeList = payBounceChequeRepository.searchPayAdvTab(accountNo, cusName, avdRegionKey1);
+		List<HistoryARDTO> listHistory = new ArrayList<HistoryARDTO>();
+		List<SapCorreceiptDTO> listSapCor = new ArrayList<SapCorreceiptDTO>();
+//		bounceChequeList = payBounceChequeRepository.searchPaySAP(null, docHead);
+		listsap =	sapDebtre.searchSapDebtList(cusName,accountNo,avdRegionKey1,p);
+		if(listsap.size() > 0) {
+			listSapCor = getDataAccountCorreCeipt(listsap.get(0).getAccountNo());
+			System.out.println("==sapDebt=="+listsap.size());
+			detailARCustomerDTO.setAddress(listsap.get(0).getCustomerHomeStreet() == null ? "" : listsap.get(0).getCustomerHomeStreet());
+			detailARCustomerDTO.setArAccountCode(listsap.get(0).getAccountNo() == null ? "": listsap.get(0).getAccountNo());
+			detailARCustomerDTO.setArGroup(listsap.get(0).getCustomerGroupCode() == null ? "" : listsap.get(0).getCustomerGroupCode());
+			detailARCustomerDTO.setArName(listsap.get(0).getCustomerName() == null ? "" : listsap.get(0).getCustomerName());
+			detailARCustomerDTO.setBranchAR(listsap.get(0).getCustomerBranchCode() == null ? "" : listsap.get(0).getCustomerBranchCode());
+			detailARCustomerDTO.setGlAccount(listsap.get(0).getGlAccount() == null ? "" : listsap.get(0).getGlAccount());
+			detailARCustomerDTO.setRegionKey1(listsap.get(0).getRef1SapRegionCode() == null ? "" : listsap.get(0).getRef1SapRegionCode());
+			detailARCustomerDTO.setTaxId(listsap.get(0).getTaxCode() == null ? "" : listsap.get(0).getTaxCode());
+			for (SapDebtEntity sabEm : listsap) {
+				payBounceChequeDTO = new PayBounceChequeDTO();
 
-		detailARCustomerDTO
-				.setAddress(bounceChequeList.get(0).getAddress() == null ? "" : bounceChequeList.get(0).getAddress());
-		detailARCustomerDTO.setArAccountCode(
-				bounceChequeList.get(0).getArAccountCode() == null ? "" : bounceChequeList.get(0).getArAccountCode());
-		detailARCustomerDTO
-				.setArGroup(bounceChequeList.get(0).getArGroup() == null ? "" : bounceChequeList.get(0).getArGroup());
-		detailARCustomerDTO
-				.setArName(bounceChequeList.get(0).getArName() == null ? "" : bounceChequeList.get(0).getArName());
-		detailARCustomerDTO.setBranchAR(
-				bounceChequeList.get(0).getBranchAR() == null ? "" : bounceChequeList.get(0).getBranchAR());
-		detailARCustomerDTO.setGlAccount(
-				bounceChequeList.get(0).getGlAccount() == null ? "" : bounceChequeList.get(0).getGlAccount());
-		detailARCustomerDTO.setRegionKey1(
-				bounceChequeList.get(0).getRegionKey1() == null ? "" : bounceChequeList.get(0).getRegionKey1());
-		detailARCustomerDTO
-				.setTaxId(bounceChequeList.get(0).getTaxId() == null ? "" : bounceChequeList.get(0).getTaxId());
+				if (sabEm.getLocalBalanceDue()!=new BigDecimal(0)) {
+					payBounceChequeDTO.setRefDate(sabEm.getRefSapPeriod());
+					payBounceChequeDTO.setDocHead(sabEm.getDocHeaderTextInv());
+					payBounceChequeDTO.setServiceKey3(sabEm.getRef3ServiceName());
+					payBounceChequeDTO.setCurrency(sabEm.getCurrencyCodeAr());
+					payBounceChequeDTO.setAmountARin(sabEm.getLocalBalanceDue().doubleValue());
+					payBounceChequeDTO.setRateChange(sabEm.getExchRateAr().doubleValue());
+					payBounceChequeDTO.setAmountARout(sabEm.getTransBalanceDue().doubleValue());
+					payBounceChequeDTO.setCurrencyChangeDate(sabEm.getExchRateDateAr()); // formatDatePass
+					payBounceChequeDTO.setDocNo(sabEm.getSapdocNo());
+					payBounceChequeDTO.setAccountYear(Integer.valueOf(sabEm.getFiscalYear()));
+					payBounceChequeDTO.setDocDate(sabEm.getDocDateAr()); // formatDatePass
+					payBounceChequeDTO.setPassDate(DateUtil.getDisplay(sabEm.getPostingDateAr(), DateUtil.STANDARD_DATE_PATTERN, DateUtil.ENG_LOCALE));
+					payBounceChequeDTO.setVatCode(sabEm.getTaxCode());
+					payBounceChequeDTO.setMessage(sabEm.getAwText());
+					payBounceChequeDTO.setArAccountCode(sabEm.getAccountNo());
+					payBounceChequeDTO.setArName(sabEm.getCustomerName());
+					payBounceChequeDTO.setGlAccount(sabEm.getGlAccount());
+					payBounceChequeDTO.setTaxId(sabEm.getTaxCode());
+					payBounceChequeDTO.setArGroup(sabEm.getCustomerGroupCode());
+					payBounceChequeDTO.setRegionKey1(sabEm.getRef1SapRegionCode());
+					payBounceChequeDTO.setBranchAR(sabEm.getCustomerBranchCode());
+					payBounceChequeDTO.setAddress(sabEm.getCustomerHomeStreet());
+					payBounceChequeDTO.setRecordStatus(sabEm.getRecordStatus());
+					payBounceChequeDTO.setAmountPay(sabEm.getTransBalanceDue());
+					payBounceChequeDTO.setAmountTotalPay(sabEm.getTransBalanceDue());
+					payBounceChequeDTO.setCurrencyCode(sabEm.getCustomerCountryKey());
+					list.add(payBounceChequeDTO);
+				}
 
-		for (int i = 0; i < bounceChequeList.size(); i++) {
-			payBounceChequeDTO = new PayBounceChequeDTO();
-
-			payBounceChequeDTO.setRefDate(formatDateDoc(bounceChequeList.get(i).getRefDate()));
-			payBounceChequeDTO.setDocHead(bounceChequeList.get(i).getDocHead());
-			payBounceChequeDTO.setServiceKey3(bounceChequeList.get(i).getServiceKey3());
-			payBounceChequeDTO.setCurrency(bounceChequeList.get(i).getCurrency());
-			payBounceChequeDTO.setAmountARin(bounceChequeList.get(i).getAmountARin());
-			payBounceChequeDTO.setRateChange(bounceChequeList.get(i).getRateChange());
-			payBounceChequeDTO.setAmountARout(bounceChequeList.get(i).getAmountARout());
-			payBounceChequeDTO.setCurrencyChangeDate((bounceChequeList.get(i).getCurrencyChangeDate())); // formatDatePass
-			payBounceChequeDTO.setDocNo(bounceChequeList.get(i).getDocNo());
-			payBounceChequeDTO.setAccountYear(bounceChequeList.get(i).getAccountYear());
-			payBounceChequeDTO.setDocDate(bounceChequeList.get(i).getDocDate()); // formatDatePass
-			payBounceChequeDTO.setPassDate(formatDatePass(bounceChequeList.get(i).getPassDate()));
-			payBounceChequeDTO.setVatCode(bounceChequeList.get(i).getVatCode());
-			payBounceChequeDTO.setMessage(bounceChequeList.get(i).getMessage());
-			payBounceChequeDTO.setArAccountCode(bounceChequeList.get(i).getArAccountCode());
-			payBounceChequeDTO.setArName(bounceChequeList.get(i).getArName());
-			payBounceChequeDTO.setGlAccount(bounceChequeList.get(i).getGlAccount());
-			payBounceChequeDTO.setTaxId(bounceChequeList.get(i).getTaxId());
-			payBounceChequeDTO.setArGroup(bounceChequeList.get(i).getArGroup());
-			payBounceChequeDTO.setRegionKey1(bounceChequeList.get(i).getRegionKey1());
-			payBounceChequeDTO.setBranchAR(bounceChequeList.get(i).getBranchAR());
-			payBounceChequeDTO.setAddress(bounceChequeList.get(i).getAddress());
-			payBounceChequeDTO.setRecordStatus(bounceChequeList.get(i).getRecordStatus());
-
-			list.add(payBounceChequeDTO);
+			}
+			if(listSapCor.size() >0) {
+				for(SapCorreceiptDTO corBean :listSapCor) {
+					HistoryARDTO historyARDTO = new HistoryARDTO();
+//					double currenIn = 0;
+//					if(corBean.getTotalcharge()!=0 && corBean.getExchangeRate() !=0) {
+//						currenIn = corBean.getReceived().doubleValue() *corBean.getExchangeRate();
+//					}
+//					
+					historyARDTO.setAccountYeah(corBean.getYearAcc());
+					historyARDTO.setAmountCurrency(corBean.getReceived().doubleValue());
+					historyARDTO.setAmountCurrencyin(corBean.getReceived().doubleValue() *corBean.getExchangeRate());
+					historyARDTO.setArNo(corBean.getInvoiceno());
+					historyARDTO.setBranch(corBean.getBranchname());
+					historyARDTO.setChangeDate(corBean.getUpdatedttm());
+					historyARDTO.setCurrency(corBean.getCurrencyCodeAr());
+					historyARDTO.setDocNo(corBean.getDocnoSap());
+					historyARDTO.setLogPay(corBean.getPaymentcase());
+					historyARDTO.setMassage(corBean.getMessage());
+					historyARDTO.setPayAmountAR(corBean.getDebtamount());
+//					String datepay = DateUtil.convertToString(corBean.getUpdatedttm(), DateUtil.STANDARD_DATE_PATTERN, DateUtil.ENG_LOCALE);
+//					historyARDTO.setPayDate();
+					historyARDTO.setPayType(corBean.getReceipttype());
+					historyARDTO.setRateChange(corBean.getExchangeRate());
+//					String dateRec = DateUtil.convertToString(corBean.getReceiptdttm(), DateUtil.STANDARD_DATE_PATTERN, DateUtil.ENG_LOCALE);
+//					historyARDTO.setReceiptDate(corBean.getReceiptdttm());
+					String dateIn = DateUtil.getDisplay(corBean.getReceiptdttm(), DateUtil.STANDARD_DATE_PATTERN, DateUtil.ENG_LOCALE);
+					String dataEx = DateUtil.getDisplay(corBean.getUpdatedttm(), DateUtil.STANDARD_DATE_PATTERN, DateUtil.ENG_LOCALE);
+					historyARDTO.setDateInvoice(dateIn.toString());
+					historyARDTO.setDateExrate(dataEx.toString());
+					historyARDTO.setDatecCreate(dataEx.toString());
+					historyARDTO.setReceiptNo(corBean.getReceiptno());
+					historyARDTO.setRefDate(corBean.getBillcycle());
+					historyARDTO.setServiceKey3(corBean.getRef3ServiceName());
+					historyARDTO.setStatus(corBean.getAttributes().indexOf("R") > -1 ? "ยกเลิก"
+							: (corBean.getAttributes().indexOf("C") > -1 ? "ปกติ" : "หนี้สูญรับคืน"));
+					historyARDTO.setUser(corBean.getUpdateuser());
+					historyARDTO.setVat(corBean.getVattm());
+					historyARDTO.setRemark(corBean.getRemark());
+					historyARDTO.setVatIn(corBean.getVattm()*corBean.getExchangeRate());
+					listHistory.add(historyARDTO);
+					
+				}
+			}
+	
+//			bounceChequeDTO.setDetailARCustomerDTO(detailARCustomerDTO);
+//			bounceChequeDTO.setPayBounceChequeDTOList(list);
+//			bounceChequeDTO.setHistoryARDTOList(list2);
+			bounceChequeDTO.setDetailARCustomerDTO(detailARCustomerDTO);
+			bounceChequeDTO.setPayBounceChequeDTOList(list);
+			bounceChequeDTO.setHistoryARDTOList(listHistory);
+			bounceChequeDTO.setVatRD(vatRate);
+			
 		}
-
-		Date date = new Date();
-		historyARDTO.setAccountYeah("1234");
-		historyARDTO.setAmountCurrency(200.00);
-		historyARDTO.setAmountCurrencyin(100.00);
-		historyARDTO.setArNo("เลขที่ใบแจ้งหนี้");
-		historyARDTO.setBranch("สาขาลูกหนี้");
-		historyARDTO.setChangeDate(date);
-		historyARDTO.setCurrency("USD");
-		historyARDTO.setDocNo("เลขที่เอกสาร");
-		historyARDTO.setLogPay("วิธีการชำระ");
-		historyARDTO.setMassage("Msss");
-		historyARDTO.setPayAmountAR(500.00);
-		historyARDTO.setPayDate(date);
-		historyARDTO.setPayType("ประเภทการชำระ");
-		historyARDTO.setRateChange(32.22);
-		historyARDTO.setReceiptDate(date);
-		historyARDTO.setReceiptNo("เลขที่ใบเสณ้จ");
-		historyARDTO.setRefDate("รอบการใช้งาน");
-		historyARDTO.setServiceKey3("Service");
-		historyARDTO.setStatus("Status");
-		historyARDTO.setUser("ผู้รับชำระ");
-		historyARDTO.setVat(20.00);
-		historyARDTO.setRemark("remark");
-		historyARDTO.setVatIn(10.00);
-
-		historyARDTO2.setAccountYeah("1234");
-		historyARDTO2.setAmountCurrency(200.00);
-		historyARDTO2.setAmountCurrencyin(100.00);
-		historyARDTO2.setArNo("เลขที่ใบแจ้งหนี้");
-		historyARDTO2.setBranch("สาขาลูกหนี้");
-		historyARDTO2.setChangeDate(date);
-		historyARDTO2.setCurrency("USD");
-		historyARDTO2.setDocNo("เลขที่เอกสาร");
-		historyARDTO2.setLogPay("วิธีการชำระ");
-		historyARDTO2.setMassage("Msss");
-		historyARDTO2.setPayAmountAR(500.00);
-		historyARDTO2.setPayDate(date);
-		historyARDTO2.setPayType("ประเภทการชำระ");
-		historyARDTO2.setRateChange(32.22);
-		historyARDTO2.setReceiptDate(date);
-		historyARDTO2.setReceiptNo("เลขที่ใบเสณ้จ");
-		historyARDTO2.setRefDate("รอบการใช้งาน");
-		historyARDTO2.setServiceKey3("Service");
-		historyARDTO2.setStatus("Status");
-		historyARDTO2.setUser("ผู้รับชำระ");
-		historyARDTO2.setVat(20.00);
-		historyARDTO2.setRemark("remark");
-		historyARDTO2.setVatIn(10.00);
-		list2.add(historyARDTO2);
-		list2.add(historyARDTO);
-
-		bounceChequeDTO.setDetailARCustomerDTO(detailARCustomerDTO);
-		bounceChequeDTO.setPayBounceChequeDTOList(list);
-		bounceChequeDTO.setHistoryARDTOList(list2);
-
 		return bounceChequeDTO;
 	}
 
@@ -1104,6 +1108,7 @@ public class BounceChequeService {
 			
 			// creditLimitTransList
 			dto = creatOtbossJson(settlePaymentDTO);
+			episService.testByUpdateSap(sapListt);
 			dto.getData().get(0).getNo(); // à¹€à¸¥à¸‚à¸—à¸µà¹ˆ :
 											// EPO170402F1710310004
 			dto.getData().get(0).getBranchName(); // à¸ªà¸²à¸‚à¸²à¸—à¸µà¹ˆà¸­à¸­à¸�à¹ƒà¸šà¸�à¸³à¸�à¸±à¸šà¸ à¸²à¸©à¸µ
@@ -1139,7 +1144,8 @@ public class BounceChequeService {
 
 				result.setPayBounceChequeDTO(bean.getPayBounceChequeDTO());
 			}
-			saveSapDept(sapListt);
+//			saveSapDept(sapListt);
+			
 			result.setDetailARCustomerDTOList(DCusList);
 			result.setPayBounceChequeDTOList(PBChqeueList);
 			result.setCreatePaymentResultDTO(dto);
@@ -1383,73 +1389,6 @@ public class BounceChequeService {
 	
 	public Double changeOut4In(BigDecimal amount, BigDecimal vat){
 		return amount.multiply(vat).setScale(2,  RoundingMode.HALF_UP).doubleValue();
-	}
-	public int saveSapDept(List<SapDebtDTO> sapListfor) throws SQLException {
-
-		StringBuilder sql = new StringBuilder();
-		sql.append("UPDATE SAP_DEBT SET ");
-		sql.append("LOCAL_TOTAL_PAID = ? ");
-		sql.append(",LOCAL_VAT_PAID =? ");
-		sql.append(",TRANS_TOTAL_PAID = ? ");
-		sql.append(",TRANS_VAT_PAID =? ");
-		sql.append(",LOCAL_BALANCE_DUE = ? ");
-		sql.append(",TRANS_BALANCE_DUE =? ");
-		sql.append("WHERE ACCOUNT_NO ='160000026' ");
-//		sql.append("AND DOC_HEADER_TEXT_INV =? ");
-
-		int s =0;
-		try { 
-
-					System.out.println("sql==="+sql.toString());
-					 int[] types = {Types.DOUBLE,Types.DOUBLE,Types.DOUBLE,Types.DOUBLE,Types.DOUBLE, Types.DOUBLE};
-
-					for(SapDebtDTO beanSap:sapListfor) {
-						System.out.println("getAccountNo=="+beanSap.getAccountNo());
-						System.out.println("getDocHeaderTextInv=="+beanSap.getDocHeaderTextInv());
-						System.out.println("getLocalTotalPaid=="+beanSap.getLocalTotalPaid());
-						System.out.println("getLocalVatPaid=="+beanSap.getLocalVatPaid());
-						System.out.println("getTransTotalPaid=="+beanSap.getTransTotalPaid());
-						System.out.println("getTransVatPaid=="+beanSap.getTransVatPaid());
-						System.out.println("beanSap.getLocalBalanceDue()=="+beanSap.getLocalBalanceDue());
-						System.out.println("beanSap.getTransBalanceDue()=="+beanSap.getTransBalanceDue());
-						
-						 Object[] params = {  beanSap.getLocalTotalPaid(), beanSap.getLocalVatPaid(),beanSap.getTransTotalPaid(),beanSap.getTransVatPaid(),
-								              beanSap.getLocalBalanceDue(),beanSap.getTransBalanceDue()};
-						s = episJdbcTemplate.update(sql.toString(),params ,types );
-																
-					}
-//					StringBuilder sql = null;
-//					for(SapDebtDTO beanSap:sapListfor) {
-//						 sql = new StringBuilder();
-//						System.out.println("getAccountNo=="+beanSap.getAccountNo());
-//						System.out.println("getDocHeaderTextInv=="+beanSap.getDocHeaderTextInv());
-//						System.out.println("getLocalTotalPaid=="+beanSap.getLocalTotalPaid());
-//						System.out.println("getLocalVatPaid=="+beanSap.getLocalVatPaid());
-//						System.out.println("getTransTotalPaid=="+beanSap.getTransTotalPaid());
-//						System.out.println("getTransVatPaid=="+beanSap.getTransVatPaid());
-//						System.out.println("beanSap.getLocalBalanceDue()=="+beanSap.getLocalBalanceDue());
-//						System.out.println("beanSap.getTransBalanceDue()=="+beanSap.getTransBalanceDue());
-//						sql.append("UPDATE SAP_DEBT SET ");
-//						sql.append("LOCAL_TOTAL_PAID = "+beanSap.getLocalTotalPaid());
-//						sql.append(" ,LOCAL_VAT_PAID = "+beanSap.getLocalVatPaid());
-//						sql.append(" ,TRANS_TOTAL_PAID = "+beanSap.getTransTotalPaid());
-//						sql.append(" ,TRANS_VAT_PAID ="+beanSap.getTransVatPaid());
-//						sql.append(" ,LOCAL_BALANCE_DUE ="+beanSap.getLocalBalanceDue());
-//						sql.append(" ,TRANS_BALANCE_DUE ="+beanSap.getTransBalanceDue());
-////						sql.append("WHERE ACCOUNT_NO =? ");
-////						sql.append("AND DOC_HEADER_TEXT_INV =? ");
-//						sql.append(" WHERE DOC_HEADER_TEXT_INV ="+beanSap.getDocHeaderTextInv().trim());
-//						System.out.println("sql==="+sql.toString());
-//						episJdbcTemplate.execute(sql.toString());
-//					}
-
-//					s = 1;
-
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println("saveSapDept===="+s);
-		return s;
 	}
 
 }
